@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">TableOfAnnouncements</string>
+    <!--Menu Drawer Strings -->
+    <string name="an_cat1">Объявления</string>
+    <string name="an_my_ans">Мои объявления</string>
+    <string name="an_car">Машины</string>
+    <string name="an_pc">Компьютеры</string>
+    <string name="an_smartphone">Смартфоны</string>
+    <string name="an_dm">Бытовая техника</string>
+
+    <string name="an_cat2">Аккаунт</string>
+    <string name="an_sign_up">Регистрация</string>
+    <string name="an_sign_in">Вход</string>
+    <string name="an_out">Выход</string>
+
+</resources>
