@@ -4,7 +4,9 @@
     tools:showIn="navigation_view">
 
         <item
-            android:title="@string/an_cat1">
+            android:id="@+id/id_cat1"
+            android:title="@string/an_cat1"
+            android:enabled="false" >
             <menu>
                 <item
                     android:id="@+id/id_my_ans"

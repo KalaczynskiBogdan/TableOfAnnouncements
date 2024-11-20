@@ -5,8 +5,8 @@ plugins {
     // Google
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.googleGmsGoogleServices)
 }
-
 android {
     namespace = "com.example.tableofannouncements"
     compileSdk = 34
@@ -44,6 +44,7 @@ android {
 
 dependencies {
 
+
     // Junit
     testImplementation(libs.junit)
 
@@ -80,7 +81,10 @@ dependencies {
     // Material
     implementation(libs.google.material)
 
-    // Firebase TODO: Add Firebase dependencies
+    // Firebase
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.storage)
 
     // Hilt
     ksp(libs.google.hilt.compiler)

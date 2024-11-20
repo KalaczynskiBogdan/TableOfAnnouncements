@@ -10,7 +10,25 @@
 
     <string name="an_cat2">Аккаунт</string>
     <string name="an_sign_up">Регистрация</string>
-    <string name="an_sign_in">Вход</string>
-    <string name="an_out">Выход</string>
+    <string name="an_sign_in">Войти</string>
+    <string name="an_out">Выйти</string>
+
+    <!-- Data and sign_in_up_out-->
+    <string name="email">kalaczynskibo@gmail.com</string>
+    <string name="email_hint">Введите вашу почту</string>
+    <string name="password_hint">Введите ваш пароль</string>
+    <string name="sign_up_action">Зарегистрироваться</string>
+    <string name="sign_in_action">Войти</string>
+    <string name="forget_password_action">Забыли пароль?</string>
+    <string name="sign_up_error">Не удалось зарегистрироваться!</string>
+    <string name="sign_in_error">Не удалось войти!</string>
+    <string name="sign_up_success">Вы успешно зарегистрировались!</string>
+    <string name="sign_in_success">Вы успешно зашли!</string>
+    <string name="email_verification_message">На Вашу почту было отправлено письмо для подтверждения!</string>
+    <string name="email_verification_error">Не удалось отправить письмо для подтверждения на Вашу почту!</string>
+
+    <string name="open">Открытый</string>
+    <string name="close">Закрытый</string>
+
 
 </resources>
