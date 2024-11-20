@@ -14,31 +14,33 @@ class DialogHelper(act: MainActivity) {
         val builder = AlertDialog.Builder(activity)
         val binding = SignDialogBinding.inflate(activity.layoutInflater)
         val view = binding.root
+        builder.setView(view)
 
         if (index == DialogConst.SIGN_UP_STATE) {
             binding.tvSignTitle.text = activity.resources.getString(R.string.an_sign_up)
-            binding.btnSignUp.text = activity.resources.getString(R.string.sign_up_action)
+            binding.btnSign.text = activity.resources.getString(R.string.sign_up_action)
         } else {
             binding.tvSignTitle.text = activity.resources.getString(R.string.an_sign_in)
-            binding.btnSignUp.text = activity.resources.getString(R.string.sign_in_action)
+            binding.btnSign.text = activity.resources.getString(R.string.sign_in_action)
         }
-        binding.btnSignUp.setOnClickListener {
+
+        val dialog = builder.create()
+
+        binding.btnSign.setOnClickListener {
             if (index == DialogConst.SIGN_UP_STATE) {
+                dialog.dismiss()
                 accHelper.signUpWithEmail(
                     binding.etSignEmail.text.toString(),
                     binding.etSignPassword.text.toString()
                 )
             } else {
+                dialog.dismiss()
+                accHelper.signInWithEmail(
+                    binding.etSignEmail.text.toString(),
+                    binding.etSignPassword.text.toString()
+                )
             }
         }
-
-
-
-        builder.setView(view)
-        builder.show()
-
-
+        dialog.show()
     }
-
-
 }

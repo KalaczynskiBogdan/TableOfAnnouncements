@@ -13,15 +13,24 @@ class AccountHelper(act: MainActivity) {
             activity.myAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task->
                 if (task.isSuccessful){
                     sendEmailVerification(task.result.user!!)
+                    activity.uiUpdate(task.result.user)
                 }else{
                     Toast.makeText(activity, activity.resources.getString(R.string.sign_up_error), Toast.LENGTH_LONG).show()
                 }
             }
-        }else{}
+        }
     }
 
     fun signInWithEmail(email: String, password: String){
-
+        if (email.isNotEmpty() && password.isNotEmpty()){
+            activity.myAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task->
+                if (task.isSuccessful){
+                    activity.uiUpdate(task.result.user)
+                }else{
+                    Toast.makeText(activity, activity.resources.getString(R.string.sign_in_error), Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     private fun sendEmailVerification(user: FirebaseUser){
@@ -33,5 +42,4 @@ class AccountHelper(act: MainActivity) {
             }
         }
     }
-
 }

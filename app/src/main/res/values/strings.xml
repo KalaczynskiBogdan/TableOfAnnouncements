@@ -15,6 +15,7 @@
 
     <!-- Data and sign_in_up_out-->
     <string name="email">kalaczynskibo@gmail.com</string>
+    <string name="not_reg">Войдите или зарегистрируйтесь</string>
     <string name="email_hint">Введите вашу почту</string>
     <string name="password_hint">Введите ваш пароль</string>
     <string name="sign_up_action">Зарегистрироваться</string>

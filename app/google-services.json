@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "677705367036",
+    "project_id": "tableofannouncements",
+    "storage_bucket": "tableofannouncements.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677705367036:android:e1ab7cda80117ded1a4679",
+        "android_client_info": {
+          "package_name": "com.example.tableofannouncements"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAadXxcWi3kTdvkCBewas7mkZFZsJPVV0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
