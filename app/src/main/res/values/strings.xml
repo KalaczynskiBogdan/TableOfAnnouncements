@@ -27,6 +27,9 @@
     <string name="sign_in_success">Вы успешно зашли!</string>
     <string name="email_verification_message">На Вашу почту было отправлено письмо для подтверждения!</string>
     <string name="email_verification_error">Не удалось отправить письмо для подтверждения на Вашу почту!</string>
+    <string name="password_reset_message">На Вашу почту было отправлено письмо для восстановления пароля!</string>
+    <string name="password_reset_error">Не удалось отправить письмо для восстановления пароля!</string>
+    <string name="enter_your_email">Пожалуйста, введите вашу почту для восстановления!</string>
 
     <string name="open">Открытый</string>
     <string name="close">Закрытый</string>

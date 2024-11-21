@@ -1,5 +1,7 @@
 package com.example.tableofannouncements.dialoghelper
 
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.tableofannouncements.MainActivity
 import com.example.tableofannouncements.R
@@ -16,31 +18,67 @@ class DialogHelper(act: MainActivity) {
         val view = binding.root
         builder.setView(view)
 
+        setDialogState(index, binding)
+
+        val dialog = builder.create()
+
+        binding.btnSign.setOnClickListener { setOnClickSign(index, binding, dialog) }
+        binding.btnForgetPassword.setOnClickListener { setOnClickForgetPassword(binding, dialog) }
+
+        dialog.show()
+    }
+
+    private fun setOnClickForgetPassword(binding: SignDialogBinding, dialog: AlertDialog) {
+        if (binding.etSignEmail.text.toString().isNotEmpty()) {
+            activity.myAuth.sendPasswordResetEmail(binding.etSignEmail.text.toString())
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            activity,
+                            activity.resources.getString(R.string.password_reset_message),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            activity,
+                            activity.resources.getString(R.string.password_reset_message),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            dialog.dismiss()
+        } else {
+            binding.apply {
+                tvEnterEmail.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun setDialogState(index: Int, binding: SignDialogBinding) {
         if (index == DialogConst.SIGN_UP_STATE) {
             binding.tvSignTitle.text = activity.resources.getString(R.string.an_sign_up)
             binding.btnSign.text = activity.resources.getString(R.string.sign_up_action)
         } else {
             binding.tvSignTitle.text = activity.resources.getString(R.string.an_sign_in)
             binding.btnSign.text = activity.resources.getString(R.string.sign_in_action)
+            binding.btnForgetPassword.visibility = View.VISIBLE
         }
-
-        val dialog = builder.create()
-
-        binding.btnSign.setOnClickListener {
-            if (index == DialogConst.SIGN_UP_STATE) {
-                dialog.dismiss()
-                accHelper.signUpWithEmail(
-                    binding.etSignEmail.text.toString(),
-                    binding.etSignPassword.text.toString()
-                )
-            } else {
-                dialog.dismiss()
-                accHelper.signInWithEmail(
-                    binding.etSignEmail.text.toString(),
-                    binding.etSignPassword.text.toString()
-                )
-            }
-        }
-        dialog.show()
     }
+
+    private fun setOnClickSign(index: Int, binding: SignDialogBinding, dialog: AlertDialog) {
+        if (index == DialogConst.SIGN_UP_STATE) {
+            dialog.dismiss()
+            accHelper.signUpWithEmail(
+                binding.etSignEmail.text.toString(),
+                binding.etSignPassword.text.toString()
+            )
+        } else {
+            dialog.dismiss()
+            accHelper.signInWithEmail(
+                binding.etSignEmail.text.toString(),
+                binding.etSignPassword.text.toString()
+            )
+        }
+    }
+
 }
