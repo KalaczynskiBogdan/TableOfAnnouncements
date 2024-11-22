@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.Toolbar
-        android:background="@color/material_dynamic_tertiary30"
         android:id="@+id/toolbar"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"

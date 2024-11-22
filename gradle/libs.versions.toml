@@ -1,6 +1,6 @@
 [versions]
 # Plugins
-agp = "8.5.0"
+agp = "8.7.2"
 kotlin = "1.9.21"
 ksp = "1.9.23-1.0.20"
 
@@ -41,6 +41,10 @@ googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.1.0"
 firebaseDatabase = "21.0.0"
 firebaseStorage = "21.0.1"
+
+play-services = "21.2.0"
+credentials = "1.3.0"
+googleid = "1.1.1"
 
 [libraries]
 # Junit
@@ -86,9 +90,16 @@ okhttp = { group = "com.squareup.okhttp3", name = "logging-interceptor", version
 
 # Glide
 glide = { group="com.github.bumptech.glide", name="glide", version.ref="glide" }
+
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
+
+play-services = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "play-services" }
+
+credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
+credentials-play-services = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentials" }
+googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleid" }
 
 [plugins]
 

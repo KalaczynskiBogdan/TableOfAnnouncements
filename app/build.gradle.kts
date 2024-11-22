@@ -13,8 +13,8 @@ android {
 
     defaultConfig {
         applicationId = "com.example.tableofannouncements"
-        minSdk = 34
-        targetSdk = 34
+        minSdk = 27
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -85,6 +85,13 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
     implementation(libs.firebase.storage)
+
+
+    implementation(libs.play.services)
+
+    implementation (libs.credentials)
+    implementation (libs.credentials.play.services)
+    implementation (libs.googleid)
 
     // Hilt
     ksp(libs.google.hilt.compiler)

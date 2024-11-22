@@ -10,12 +10,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.tableofannouncements.accounthelper.GoogleSignInClient
 import com.example.tableofannouncements.databinding.ActivityMainBinding
 import com.example.tableofannouncements.dialoghelper.DialogConst
 import com.example.tableofannouncements.dialoghelper.DialogHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var tvAccountEmail: TextView
@@ -73,7 +78,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.id_my_ans -> {}
+            R.id.id_my_ans -> {googleSignIn()}
             R.id.id_car -> {}
             R.id.id_pc -> {}
             R.id.id_smartphone -> {}
@@ -93,5 +98,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun googleSignIn(){
+        val googleAuthClient = GoogleSignInClient(applicationContext)
+        CoroutineScope(Dispatchers.IO).launch {
+            googleAuthClient.signIn()
+        }
+
     }
 }

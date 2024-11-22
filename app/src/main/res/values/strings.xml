@@ -14,6 +14,7 @@
     <string name="an_out">Выйти</string>
 
     <!-- Data and sign_in_up_out-->
+    <string name="default_web_client_id">677705367036-9ji70ur8sem521kkpi7kccfjmft0hlmb.apps.googleusercontent.com</string>
     <string name="email">kalaczynskibo@gmail.com</string>
     <string name="not_reg">Войдите или зарегистрируйтесь</string>
     <string name="email_hint">Введите вашу почту</string>
