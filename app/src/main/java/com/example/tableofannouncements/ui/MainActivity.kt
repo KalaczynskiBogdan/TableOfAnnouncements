@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val fragment = AddNewAdsFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container,fragment)
+                .addToBackStack(null)
                 .commit()
         }
         showMenuItem = false

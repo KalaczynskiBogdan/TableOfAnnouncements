@@ -69,6 +69,7 @@
         android:layout_height="wrap_content" />
 
     <com.google.android.gms.common.SignInButton
+        android:background="@drawable/common_google_signin_btn_icon_dark"
         app:buttonSize="standard"
         android:id="@+id/btnSignInWithGoogle"
         android:layout_marginStart="16dp"

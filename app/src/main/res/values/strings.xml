@@ -37,9 +37,15 @@
     <string name="enter_for_ling_to_Google">У вас уже есть аккаунт, который зарегистрирован на этот Email адресс, войдите в Ваш аккаунт Google, чтобы подвязать две учетные записи.</string>
 
 
+    <string name="no_result">no result</string>
+
     <string name="open">Открытый</string>
     <string name="close">Закрытый</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="select_country">*Выберите страну</string>
+    <string name="select_city">*Выберите город</string>
+
 
 
 </resources>

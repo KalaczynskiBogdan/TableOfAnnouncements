@@ -25,21 +25,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
 
-            <SearchView
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginTop="4dp"
-                android:id="@+id/CountrySearch"
+            <TextView
+                android:gravity="center"
+                android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+                android:padding="8dp"
+                android:text="@string/select_country"
+                android:id="@+id/tvSelectCountry"
+                android:layout_margin="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <Spinner
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginTop="4dp"
-                android:id="@+id/spCountry"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </ScrollView>
