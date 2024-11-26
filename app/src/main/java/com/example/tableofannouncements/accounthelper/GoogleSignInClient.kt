@@ -21,10 +21,10 @@ class GoogleSignInClient(private val context: Context) {
     private val fireBaseAuth = FirebaseAuth.getInstance()
 
     fun isSignedIn(): Boolean {
-        if (fireBaseAuth.currentUser != null){
+        if (fireBaseAuth.currentUser != null) {
             println(tag + "already signed in")
             return true
-        }else{
+        } else {
             return false
         }
     }
@@ -33,7 +33,6 @@ class GoogleSignInClient(private val context: Context) {
         if (isSignedIn()) {
             return true
         }
-
         try {
             val result = buildCredentialRequest()
             return handleSignIn(result)
@@ -60,7 +59,6 @@ class GoogleSignInClient(private val context: Context) {
 
     private suspend fun handleSignIn(result: GetCredentialResponse): Boolean {
         val credential = result.credential
-
         if (
             credential is CustomCredential &&
             credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
@@ -91,6 +89,5 @@ class GoogleSignInClient(private val context: Context) {
         credentialManager.clearCredentialState(
             ClearCredentialStateRequest()
         )
-        fireBaseAuth.signOut()
     }
 }

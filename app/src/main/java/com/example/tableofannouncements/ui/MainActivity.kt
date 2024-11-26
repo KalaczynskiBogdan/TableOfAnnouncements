@@ -1,8 +1,10 @@
-package com.example.tableofannouncements
+package com.example.tableofannouncements.ui
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.tableofannouncements.accounthelper.GoogleSignInClient
+import com.example.tableofannouncements.R
 import com.example.tableofannouncements.databinding.ActivityMainBinding
 import com.example.tableofannouncements.dialoghelper.DialogConst
 import com.example.tableofannouncements.dialoghelper.DialogHelper
@@ -20,13 +22,13 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var tvAccountEmail: TextView
     private lateinit var binding: ActivityMainBinding
     private val dialogHelper = DialogHelper(this)
     val myAuth = FirebaseAuth.getInstance()
+    private var showMenuItem = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         init()
 
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val currentFragment = supportFragmentManager.findFragmentById(R.id.container)
+
+                if (currentFragment is AddNewAdsFragment) {
+                    supportFragmentManager.popBackStack()
+                    showMenuItem = true
+                    invalidateOptionsMenu()
+                } else {
+                }
+            }
+        })
+
     }
 
     override fun onStart() {
@@ -51,7 +66,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         uiUpdate(myAuth.currentUser)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu_item, menu)
+        menu?.findItem(R.id.id_add_new_ad)?.isVisible = showMenuItem
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.id_add_new_ad){
+            val fragment = AddNewAdsFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container,fragment)
+                .commit()
+        }
+        showMenuItem = false
+        invalidateOptionsMenu()
+
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun init() {
+        setSupportActionBar(binding.mainContent.toolbar)
         val toggle = ActionBarDrawerToggle(
             this,
             binding.drawerLayout,
@@ -60,7 +95,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.string.close
         )
         binding.drawerLayout.addDrawerListener(toggle)
-        toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
+        toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.black)
         toggle.syncState()
 
         binding.navV.setNavigationItemSelectedListener(this)
@@ -68,17 +103,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         tvAccountEmail = binding.navV.getHeaderView(0).findViewById(R.id.tvAccountEmail)
     }
 
-    fun uiUpdate(user: FirebaseUser?){
-        tvAccountEmail.text = if (user == null){
+    fun uiUpdate(user: FirebaseUser?) {
+        tvAccountEmail.text = if (user == null) {
             resources.getString(R.string.not_reg)
-        }else{
+        } else {
             user.email
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.id_my_ans -> {googleSignIn()}
+            R.id.id_my_ans -> {}
+
             R.id.id_car -> {}
             R.id.id_pc -> {}
             R.id.id_smartphone -> {}
@@ -94,17 +130,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.id_out -> {
                 uiUpdate(null)
                 myAuth.signOut()
+                CoroutineScope(Dispatchers.IO).launch { dialogHelper.accHelper.signOutFromGoogle() }
             }
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
-    private fun googleSignIn(){
-        val googleAuthClient = GoogleSignInClient(applicationContext)
-        CoroutineScope(Dispatchers.IO).launch {
-            googleAuthClient.signIn()
-        }
 
-    }
 }

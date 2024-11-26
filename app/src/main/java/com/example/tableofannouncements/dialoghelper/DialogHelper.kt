@@ -3,14 +3,17 @@ package com.example.tableofannouncements.dialoghelper
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.tableofannouncements.MainActivity
+import com.example.tableofannouncements.ui.MainActivity
 import com.example.tableofannouncements.R
 import com.example.tableofannouncements.accounthelper.AccountHelper
 import com.example.tableofannouncements.databinding.SignDialogBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DialogHelper(act: MainActivity) {
     private val activity = act
-    private val accHelper = AccountHelper(activity)
+    val accHelper = AccountHelper(activity)
 
     fun createSignDialog(index: Int) {
         val builder = AlertDialog.Builder(activity)
@@ -24,34 +27,8 @@ class DialogHelper(act: MainActivity) {
 
         binding.btnSign.setOnClickListener { setOnClickSign(index, binding, dialog) }
         binding.btnForgetPassword.setOnClickListener { setOnClickForgetPassword(binding, dialog) }
-
+        binding.btnSignInWithGoogle.setOnClickListener {setOnClickSignInGoogle(dialog) }
         dialog.show()
-    }
-
-    private fun setOnClickForgetPassword(binding: SignDialogBinding, dialog: AlertDialog) {
-        if (binding.etSignEmail.text.toString().isNotEmpty()) {
-            activity.myAuth.sendPasswordResetEmail(binding.etSignEmail.text.toString())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(
-                            activity,
-                            activity.resources.getString(R.string.password_reset_message),
-                            Toast.LENGTH_LONG
-                        ).show()
-                    } else {
-                        Toast.makeText(
-                            activity,
-                            activity.resources.getString(R.string.password_reset_message),
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
-            dialog.dismiss()
-        } else {
-            binding.apply {
-                tvEnterEmail.visibility = View.VISIBLE
-            }
-        }
     }
 
     private fun setDialogState(index: Int, binding: SignDialogBinding) {
@@ -81,4 +58,36 @@ class DialogHelper(act: MainActivity) {
         }
     }
 
+    private fun setOnClickForgetPassword(binding: SignDialogBinding, dialog: AlertDialog) {
+        if (binding.etSignEmail.text.toString().isNotEmpty()) {
+            activity.myAuth.sendPasswordResetEmail(binding.etSignEmail.text.toString())
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            activity,
+                            activity.resources.getString(R.string.password_reset_message),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            activity,
+                            activity.resources.getString(R.string.password_reset_message),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            dialog.dismiss()
+        } else {
+            binding.apply {
+                tvEnterEmail.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun setOnClickSignInGoogle(dialog: AlertDialog) {
+        CoroutineScope(Dispatchers.IO).launch {
+            accHelper.signInWithGoogle()
+        }
+        dialog.dismiss()
+    }
 }

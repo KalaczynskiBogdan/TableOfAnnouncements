@@ -19,7 +19,7 @@
             android:name="com.google.android.gms.auth.api.signin.server_client_id"
             android:value="@string/default_web_client_id" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

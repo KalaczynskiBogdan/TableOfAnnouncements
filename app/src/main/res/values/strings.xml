@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">TableOfAnnouncements</string>
     <!--Menu Drawer Strings -->
+    <string name="new_ad">Объявления</string>
+
     <string name="an_cat1">Объявления</string>
     <string name="an_my_ans">Мои объявления</string>
     <string name="an_car">Машины</string>
@@ -31,9 +33,13 @@
     <string name="password_reset_message">На Вашу почту было отправлено письмо для восстановления пароля!</string>
     <string name="password_reset_error">Не удалось отправить письмо для восстановления пароля!</string>
     <string name="enter_your_email">Пожалуйста, введите вашу почту для восстановления!</string>
+    <string name="link_done">Почта успешно подключена к Google аккаунту!</string>
+    <string name="enter_for_ling_to_Google">У вас уже есть аккаунт, который зарегистрирован на этот Email адресс, войдите в Ваш аккаунт Google, чтобы подвязать две учетные записи.</string>
+
 
     <string name="open">Открытый</string>
     <string name="close">Закрытый</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
