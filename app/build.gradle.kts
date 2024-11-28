@@ -44,7 +44,6 @@ android {
 
 dependencies {
 
-
     // Junit
     testImplementation(libs.junit)
 
@@ -115,4 +114,7 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
+
+    //pixImagePicker
+    implementation(libs.piximagepicker)
 }

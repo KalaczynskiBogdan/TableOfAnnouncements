@@ -24,9 +24,31 @@ object CityHelper {
                 }
             }
 
+
         } catch (e: IOException) {
         }
         return countriesArray
+    }
+
+    fun getAllCities(context: Context, country: String): ArrayList<String> {
+        val citiesArray = ArrayList<String>()
+
+        try {
+            val inputStream: InputStream = context.assets.open("countriesToCities.json")
+            val size: Int = inputStream.available()
+            val bytesArray = ByteArray(size)
+            inputStream.read(bytesArray)
+            val jsonFile = String(bytesArray)
+            val jsonObject = JSONObject(jsonFile)
+            val citiesNames = jsonObject.getJSONArray(country)
+            for (n in 0 until citiesNames.length()) {
+                citiesArray.add(citiesNames.getString(n))
+            }
+
+        } catch (e: IOException) {
+            println(e)
+        }
+        return citiesArray
     }
 
     fun filterListData(list: ArrayList<String>, searchText: String?): ArrayList<String> {
