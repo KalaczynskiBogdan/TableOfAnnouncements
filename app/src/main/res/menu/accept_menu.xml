@@ -2,11 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-
     <item
-        android:title="@string/new_ad"
-        android:icon="@drawable/icon_add"
-        android:id="@+id/id_add_new_ad"
+        android:title="@string/edit_photos"
+        android:icon="@drawable/item_accept"
+        android:id="@+id/id_accept"
         app:showAsAction="ifRoom"
         />
 </menu>

@@ -1,10 +1,10 @@
 package com.example.tableofannouncements.ui
 
+import androidx.navigation.fragment.NavHostFragment
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +12,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.NavController
 import com.example.tableofannouncements.R
 import com.example.tableofannouncements.databinding.ActivityMainBinding
 import com.example.tableofannouncements.dialoghelper.DialogConst
 import com.example.tableofannouncements.dialoghelper.DialogHelper
-import com.example.tableofannouncements.ui.newads.AddNewAdsFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val dialogHelper = DialogHelper(this)
     val myAuth = FirebaseAuth.getInstance()
     private var showMenuItem = true
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,19 +48,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         init()
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                val currentFragment = supportFragmentManager.findFragmentById(R.id.container)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
-                if (currentFragment is AddNewAdsFragment) {
-                    supportFragmentManager.popBackStack()
-                    showMenuItem = true
-                    invalidateOptionsMenu()
-                } else {
-                }
-            }
-        })
-
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            showMenuItem = destination.id == R.id.mainFragment
+            invalidateOptionsMenu()
+        }
     }
 
     override fun onStart() {
@@ -74,25 +70,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.id_add_new_ad){
-            val fragment = AddNewAdsFragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container,fragment)
-                .addToBackStack(null)
-                .commit()
+        if (item.itemId == R.id.id_add_new_ad) {
+            navController.navigate(R.id.action_mainFragment_to_addNewAdsFragment)
+            invalidateOptionsMenu()
         }
-        showMenuItem = false
-        invalidateOptionsMenu()
-
         return super.onOptionsItemSelected(item)
     }
 
     private fun init() {
-        setSupportActionBar(binding.mainContent.toolbar)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         val toggle = ActionBarDrawerToggle(
             this,
             binding.drawerLayout,
-            binding.mainContent.toolbar,
+            binding.toolbar,
             R.string.open,
             R.string.close
         )
@@ -139,5 +130,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 
 }

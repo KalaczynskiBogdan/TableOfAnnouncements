@@ -11,13 +11,10 @@ import com.example.tableofannouncements.R
 class DialogSpinnerAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<DialogSpinnerAdapter.SpViewHolder>() {
     private val mainList = ArrayList<String>()
 
-    class SpViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    class SpViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun setData(text: String) {
             val tvSpItem = itemView.findViewById<TextView>(R.id.tvSpItem)
             tvSpItem.text = text
-        }
-
-        override fun onClick(v: View?) {
         }
     }
 

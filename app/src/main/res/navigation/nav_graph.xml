@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.tableofannouncements.ui.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+
+        <action
+            android:id="@+id/action_mainFragment_to_addNewAdsFragment"
+            app:destination="@id/addNewAdsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewAdsFragment"
+        android:name="com.example.tableofannouncements.ui.newads.AddNewAdsFragment"
+        android:label="fragment_add_new_ads"
+        tools:layout="@layout/fragment_add_new_ads" >
+        <action
+            android:id="@+id/action_addNewAdsFragment_to_imageEditorFragment3"
+            app:destination="@id/imageEditorFragment" />
+        <action
+            android:id="@+id/action_addNewAdsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageEditorFragment"
+        android:name="com.example.tableofannouncements.ui.newads.ImageEditorFragment"
+        android:label="ImageEditorFragment">
+        <action
+            android:id="@+id/action_imageEditorFragment3_to_addNewAdsFragment"
+            app:destination="@id/addNewAdsFragment" />
+    </fragment>
+
+</navigation>

@@ -6,7 +6,7 @@ import io.ak1.pix.models.Options
 import io.ak1.pix.models.Ratio
 
 object ImagePicker {
-     fun launchPix(): Options {
+    fun launchPix(): Options {
         return Options().apply {
             ratio = Ratio.RATIO_AUTO
             count = 3

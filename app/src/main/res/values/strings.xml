@@ -46,6 +46,8 @@
     <string name="select_country">*Выберите страну</string>
     <string name="select_city">*Выберите город</string>
 
+    <string name="added_soon">Скоро здесь будут объявления!</string>
+    <string name="edit_photos">Выберите поочередность фотографий</string>
 
 
 </resources>
