@@ -13,15 +13,21 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tableofannouncements.R
 import com.example.tableofannouncements.databinding.FragmentImageEditorBinding
 import com.example.tableofannouncements.models.SelectImageItem
 import com.example.tableofannouncements.ui.newads.adapter.SelectImageAdapter
+import com.example.tableofannouncements.utils.ItemTouchMoveCallback
 
 class ImageEditorFragment : Fragment() {
     private var _binding: FragmentImageEditorBinding? = null
     private val binding get() = _binding!!
+
+    private val adapter = SelectImageAdapter()
+    private val callback = ItemTouchMoveCallback(adapter)
+    private val touchHelper = ItemTouchHelper(callback)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +60,6 @@ class ImageEditorFragment : Fragment() {
         }, viewLifecycleOwner)
     }
 
-
     private fun launchPhotoPicker(imageCounter: Int) {
         val pickMultipleMedia = this.registerForActivityResult(
             ActivityResultContracts.PickMultipleVisualMedia(
@@ -71,9 +76,8 @@ class ImageEditorFragment : Fragment() {
         pickMultipleMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
     }
 
-
     private fun initAdapter(list: List<String>){
-        val adapter = SelectImageAdapter()
+        touchHelper.attachToRecyclerView(binding.rvPhotoEditor)
         binding.rvPhotoEditor.layoutManager = LinearLayoutManager(activity)
         binding.rvPhotoEditor.adapter = adapter
         val updatedList = ArrayList<SelectImageItem>()

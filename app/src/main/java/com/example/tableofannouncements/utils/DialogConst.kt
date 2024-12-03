@@ -1,4 +1,4 @@
-package com.example.tableofannouncements.dialoghelper
+package com.example.tableofannouncements.utils
 
 object DialogConst {
     const val SIGN_UP_STATE = 0

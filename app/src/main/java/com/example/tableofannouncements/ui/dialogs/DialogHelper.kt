@@ -1,4 +1,4 @@
-package com.example.tableofannouncements.dialoghelper
+package com.example.tableofannouncements.ui.dialogs
 
 import android.view.View
 import android.widget.Toast
@@ -7,6 +7,7 @@ import com.example.tableofannouncements.ui.MainActivity
 import com.example.tableofannouncements.R
 import com.example.tableofannouncements.accounthelper.AccountHelper
 import com.example.tableofannouncements.databinding.SignDialogBinding
+import com.example.tableofannouncements.utils.DialogConst
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
