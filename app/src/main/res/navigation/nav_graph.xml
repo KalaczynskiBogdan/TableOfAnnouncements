@@ -22,7 +22,8 @@
         tools:layout="@layout/fragment_add_new_ads" >
         <action
             android:id="@+id/action_addNewAdsFragment_to_imageEditorFragment3"
-            app:destination="@id/imageEditorFragment" />
+            app:destination="@id/imageEditorFragment"
+            />
         <action
             android:id="@+id/action_addNewAdsFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -33,7 +34,8 @@
         android:label="ImageEditorFragment">
         <action
             android:id="@+id/action_imageEditorFragment3_to_addNewAdsFragment"
-            app:destination="@id/addNewAdsFragment" />
+            app:destination="@id/addNewAdsFragment"
+            />
     </fragment>
 
 </navigation>

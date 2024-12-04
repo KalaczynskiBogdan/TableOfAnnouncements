@@ -1,4 +1,4 @@
-package com.example.tableofannouncements.ui.newads.adapter
+package com.example.tableofannouncements.ui.newads.adapters
 
 import android.annotation.SuppressLint
 import android.net.Uri
@@ -8,17 +8,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tableofannouncements.R
-import com.example.tableofannouncements.models.SelectImageItem
 import com.example.tableofannouncements.utils.ItemTouchMoveCallback
 
 class SelectImageAdapter : RecyclerView.Adapter<SelectImageAdapter.ImageHolder>(), ItemTouchMoveCallback.OnItemTouch {
-    private val mainArray = ArrayList<SelectImageItem>()
+    val mainArray = ArrayList<String>()
 
     class ImageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var image: ImageView
-        fun setData(item: SelectImageItem) {
+        fun setData(item: String) {
             image = itemView.findViewById(R.id.ivImage)
-            image.setImageURI(Uri.parse(item.imageUri))
+            image.setImageURI(Uri.parse(item))
         }
     }
 
@@ -43,7 +42,7 @@ class SelectImageAdapter : RecyclerView.Adapter<SelectImageAdapter.ImageHolder>(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateAdapter(newList: List<SelectImageItem>){
+    fun updateAdapter(newList: List<String>){
         mainArray.clear()
         mainArray.addAll(newList)
         notifyDataSetChanged()

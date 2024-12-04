@@ -12,7 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DialogHelper(act: MainActivity) {
+class DialogSignHelper(act: MainActivity) {
     private val activity = act
     val accHelper = AccountHelper(activity)
 

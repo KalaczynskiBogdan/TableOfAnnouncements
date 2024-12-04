@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 import com.example.tableofannouncements.R
 import com.example.tableofannouncements.databinding.ActivityMainBinding
 import com.example.tableofannouncements.utils.DialogConst
-import com.example.tableofannouncements.ui.dialogs.DialogHelper
+import com.example.tableofannouncements.ui.dialogs.DialogSignHelper
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var tvAccountEmail: TextView
     private lateinit var binding: ActivityMainBinding
-    private val dialogHelper = DialogHelper(this)
+    private val dialogHelper = DialogSignHelper(this)
     val myAuth = FirebaseAuth.getInstance()
     private var showMenuItem = true
     private lateinit var navController: NavController
