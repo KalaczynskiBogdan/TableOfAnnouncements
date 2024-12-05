@@ -49,5 +49,8 @@
     <string name="added_soon">Скоро здесь будут объявления!</string>
     <string name="edit_photos">Выберите поочередность фотографий</string>
 
+    <string name="accept">Подтвердить</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">удалить все</string>
 
 </resources>

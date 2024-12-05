@@ -1,5 +1,6 @@
 package com.example.tableofannouncements.ui.newads
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.MenuProvider
@@ -33,7 +37,7 @@ class ImageEditorFragment : Fragment() {
     private val touchHelper = ItemTouchHelper(callback)
 
     private lateinit var sharedPreferences: SharedPreferences
-
+    private lateinit var pickMultipleMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,42 +47,10 @@ class ImageEditorFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        sharedPreferences = SharedPreferences(requireContext())
-        initMenu()
-        launchPhotoPicker(3)
-    }
-
-    private fun initMenu(){
-        requireActivity().addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.accept_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.id_accept -> {
-                        val sharedPreferences = SharedPreferences(requireContext())
-                        sharedPreferences.saveStringList("listForViewPager", adapter.mainArray)
-                        findNavController().navigate(
-                            R.id.action_imageEditorFragment3_to_addNewAdsFragment,
-                            null,
-                            NavOptions.Builder()
-                                .setPopUpTo(R.id.imageEditorFragment, true)
-                                .build()
-                        )
-                        true
-                    }
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner)
-    }
-
-    private fun launchPhotoPicker(count: Int) {
-        val pickMultipleMedia = registerForActivityResult(
-            ActivityResultContracts.PickMultipleVisualMedia(count)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        pickMultipleMedia = registerForActivityResult(
+            ActivityResultContracts.PickMultipleVisualMedia()
         ) { uris ->
             if (uris.isNotEmpty()) {
                 uris.forEach { uri ->
@@ -88,36 +60,125 @@ class ImageEditorFragment : Fragment() {
                             Intent.FLAG_GRANT_READ_URI_PERMISSION
                         )
                     } catch (e: SecurityException) {
-                        Log.e("PhotoPicker", "Failed to take persistable permission for URI: $uri", e)
+                        Log.e(
+                            "PhotoPicker",
+                            "Failed to take persistable permission for URI: $uri",
+                            e
+                        )
                     }
                 }
                 val imagesStringList = uris.map { it.toString() }
-                initAdapter(imagesStringList)
+                addToAdapter(imagesStringList)
             } else {
-                findNavController().navigate(
-                    R.id.action_imageEditorFragment3_to_addNewAdsFragment,
-                    null,
-                    NavOptions.Builder()
-                        .setPopUpTo(R.id.imageEditorFragment, true)
-                        .build()
-                )
+                if (adapter.mainArray.isEmpty()) {
+                    findNavController().navigate(
+                        R.id.action_imageEditorFragment3_to_addNewAdsFragment,
+                        null,
+                        NavOptions.Builder()
+                            .setPopUpTo(R.id.imageEditorFragment, true)
+                            .build()
+                    )
+                }
             }
         }
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        sharedPreferences = SharedPreferences(requireContext())
+        initAdapter()
+        initMenu()
+        if (adapter.mainArray.size < 5) {
+            launchPhotoPicker()
+        }
+        setListeners()
+    }
+
+    private fun setListeners() {
+        binding.fabAddImage.setOnClickListener {
+            launchPhotoPicker()
+        }
+    }
+
+    private fun initMenu() {
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.edit_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.id_edit_accept -> {
+                        if (adapter.mainArray.size > 5) {
+                            Toast.makeText(
+                                requireContext(),
+                                "Максимальное количество - 5 фото, пожалуйста удалите ненужное",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            sharedPreferences.saveStringList("listForViewPager", adapter.mainArray)
+                            findNavController().navigate(
+                                R.id.action_imageEditorFragment3_to_addNewAdsFragment,
+                                null,
+                                NavOptions.Builder()
+                                    .setPopUpTo(R.id.imageEditorFragment, true)
+                                    .build()
+                            )
+                        }
+                        true
+                    }
+
+                    R.id.id_edit_edit -> {
+                        val popupMenu = PopupMenu(
+                            requireContext(),
+                            requireActivity().findViewById(R.id.id_edit_edit)
+                        )
+                        popupMenu.menuInflater.inflate(R.menu.delete_menu_item, popupMenu.menu)
+                        popupMenu.setOnMenuItemClickListener { subItem ->
+                            when (subItem.itemId) {
+                                R.id.id_delete -> {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Sub-item clicked",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    true
+                                }
+
+                                else -> false
+                            }
+                        }
+                        popupMenu.show()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner)
+    }
+
+    private fun launchPhotoPicker() {
         pickMultipleMedia.launch(
             PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo)
         )
     }
 
-    private fun initAdapter(list: List<String>){
+    private fun initAdapter() {
         touchHelper.attachToRecyclerView(binding.rvPhotoEditor)
         binding.rvPhotoEditor.layoutManager = LinearLayoutManager(activity)
         binding.rvPhotoEditor.adapter = adapter
-        val updatedList = ArrayList<String>()
-        for(element in list.indices){
-            updatedList.add(list[element])
+
+        val savedList = sharedPreferences.getStringList("listForViewPager")
+        Log.d("SavedList", savedList.toString())
+
+        if (savedList.isNotEmpty()) {
+            adapter.updateAdapter(savedList)
         }
-        adapter.updateAdapter(updatedList)
+    }
+
+    private fun addToAdapter(list: List<String>) {
+        adapter.updateAdapter(list)
     }
 
     override fun onDestroyView() {

@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container2">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
-        android:padding="4dp"
-        android:layout_marginTop="8dp"
-        android:textSize="24sp"
-        android:gravity="center"
-        android:text="@string/edit_photos"
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/tvEditPhotos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="HardcodedText" />
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="@string/edit_photos"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/item_image"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditPhotos"
+        android:id="@+id/rvPhotoEditor"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/rvPhotoEditor"
         android:layout_margin="4dp"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEditPhotos"
+        tools:listitem="@layout/item_image" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@null"
+        android:src="@drawable/icon_add"
+        app:backgroundTint="@color/grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

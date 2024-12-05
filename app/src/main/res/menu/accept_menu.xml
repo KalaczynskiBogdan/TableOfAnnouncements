@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <item
-        android:title="@string/edit_photos"
+        android:title="@string/accept"
         android:icon="@drawable/item_accept"
         android:id="@+id/id_accept"
         app:showAsAction="ifRoom"
         />
+
 </menu>

@@ -74,7 +74,11 @@ class AddNewAdsFragment : Fragment() {
     }
 
     private fun initListOfImages() {
-        imageAdapter = ImageVpAdapter()
+        imageAdapter = ImageVpAdapter(object : ImageVpAdapter.OnItemClickListener{
+            override fun onItemClicked() {
+                findNavController().navigate(R.id.action_addNewAdsFragment_to_imageEditorFragment3)
+            }
+        })
         binding.vpImages.adapter = imageAdapter
 
         val receivedList = sharedPreferences.getStringList("listForViewPager")
