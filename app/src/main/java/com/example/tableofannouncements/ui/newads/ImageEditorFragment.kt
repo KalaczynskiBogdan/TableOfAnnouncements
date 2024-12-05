@@ -137,11 +137,7 @@ class ImageEditorFragment : Fragment() {
                         popupMenu.setOnMenuItemClickListener { subItem ->
                             when (subItem.itemId) {
                                 R.id.id_delete -> {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Sub-item clicked",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    adapter.clearAdapter()
                                     true
                                 }
 

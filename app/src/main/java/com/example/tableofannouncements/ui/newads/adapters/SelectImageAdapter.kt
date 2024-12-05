@@ -47,5 +47,11 @@ class SelectImageAdapter : RecyclerView.Adapter<SelectImageAdapter.ImageHolder>(
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearAdapter(){
+        mainArray.clear()
+        notifyDataSetChanged()
+    }
+
 
 }
