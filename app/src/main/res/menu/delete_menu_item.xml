@@ -6,4 +6,9 @@
         android:title="@string/delete"
         app:showAsAction="ifRoom">
     </item>
+    <item
+        android:id="@+id/id_selectForDeleting"
+        android:title="@string/select"
+        app:showAsAction="ifRoom">
+    </item>
 </menu>

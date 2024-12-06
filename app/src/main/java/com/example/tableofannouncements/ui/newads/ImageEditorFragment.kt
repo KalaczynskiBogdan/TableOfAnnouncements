@@ -39,6 +39,8 @@ class ImageEditorFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var pickMultipleMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
+    private var fabStateAdd = true
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -96,7 +98,13 @@ class ImageEditorFragment : Fragment() {
 
     private fun setListeners() {
         binding.fabAddImage.setOnClickListener {
-            launchPhotoPicker()
+            if (fabStateAdd) {
+                launchPhotoPicker()
+            } else {
+                adapter.clearSelectedItems()
+                fabStateAdd = true
+                binding.fabAddImage.setImageResource(R.drawable.icon_add)
+            }
         }
     }
 
@@ -138,6 +146,13 @@ class ImageEditorFragment : Fragment() {
                             when (subItem.itemId) {
                                 R.id.id_delete -> {
                                     adapter.clearAdapter()
+                                    true
+                                }
+
+                                R.id.id_selectForDeleting -> {
+                                    adapter.showCheckboxes()
+                                    fabStateAdd = false
+                                    binding.fabAddImage.setImageResource(R.drawable.item_delete)
                                     true
                                 }
 

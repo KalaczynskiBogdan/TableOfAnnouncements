@@ -51,6 +51,7 @@
 
     <string name="accept">Подтвердить</string>
     <string name="edit">Редактировать</string>
-    <string name="delete">удалить все</string>
+    <string name="delete">Удалить все фото</string>
+    <string name="select">Выберите фото</string>
 
 </resources>
