@@ -8,8 +8,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/rvPhotoEditor"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:id="@+id/tvEditPhotos"
@@ -22,12 +21,21 @@
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.gms.ads.admanager.AdManagerAdView
+        app:adUnitId = "@string/unit_id"
+        app:adSize="BANNER"
+        android:id="@+id/adView"
+        app:layout_constraintTop_toBottomOf="@+id/tvEditPhotos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:background="@color/grey"
         android:id="@+id/rvPhotoEditor"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditPhotos"
+        app:layout_constraintTop_toBottomOf="@+id/adView"
         tools:listitem="@layout/item_image" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

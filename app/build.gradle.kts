@@ -118,6 +118,8 @@ dependencies {
     //pixImagePicker
     implementation(libs.piximagepicker)
 
+    implementation(libs.play.services.ads)
+
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 }
