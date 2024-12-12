@@ -6,25 +6,21 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.MenuProvider
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tableofannouncements.R
-import com.example.tableofannouncements.databinding.FragmentImageEditorBinding
 import com.example.tableofannouncements.ui.newads.adapters.SelectImageAdapter
 import com.example.tableofannouncements.utils.ItemTouchMoveCallback
 import com.example.tableofannouncements.utils.SharedPreferences
@@ -33,10 +29,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ImageEditorFragment : Fragment() {
-    private var _binding: FragmentImageEditorBinding? = null
-    private val binding get() = _binding!!
-
+class ImageEditorFragment : BaseSelectImageFrag() {
     private var adapter = SelectImageAdapter()
 
     private val callback = ItemTouchMoveCallback(adapter)
@@ -47,15 +40,6 @@ class ImageEditorFragment : Fragment() {
 
     private var fabStateAdd = true
     private lateinit var currentMenu: Menu
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentImageEditorBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,7 +53,7 @@ class ImageEditorFragment : Fragment() {
         setListeners()
     }
 
-    private fun createMediaLauncher(){
+    private fun createMediaLauncher() {
         pickMultipleMedia = registerForActivityResult(
             ActivityResultContracts.PickMultipleVisualMedia()
         ) { uris ->
@@ -84,7 +68,11 @@ class ImageEditorFragment : Fragment() {
                                 Intent.FLAG_GRANT_READ_URI_PERMISSION
                             )
                         } catch (e: SecurityException) {
-                            Log.e("PhotoPicker", "Failed to take persistable permission for URI: $uri", e)
+                            Log.e(
+                                "PhotoPicker",
+                                "Failed to take persistable permission for URI: $uri",
+                                e
+                            )
                         }
                     }
 
@@ -130,7 +118,12 @@ class ImageEditorFragment : Fragment() {
 
                 val cancelItem = menu.findItem(R.id.id_cancel)
                 val spannableTitle = SpannableString(cancelItem.title)
-                spannableTitle.setSpan(ForegroundColorSpan(Color.WHITE), 0, spannableTitle.length, 0)
+                spannableTitle.setSpan(
+                    ForegroundColorSpan(Color.WHITE),
+                    0,
+                    spannableTitle.length,
+                    0
+                )
                 cancelItem.title = spannableTitle
             }
 
@@ -207,15 +200,20 @@ class ImageEditorFragment : Fragment() {
     }
 
     private fun hideMenuItems() {
-        currentMenu.findItem(R.id.id_edit_accept)?.isVisible = false
-        currentMenu.findItem(R.id.id_edit_edit)?.isVisible = false
-        currentMenu.findItem(R.id.id_cancel)?.isVisible = true
+        currentMenu.apply {
+            findItem(R.id.id_edit_accept)?.isVisible = false
+            findItem(R.id.id_edit_edit)?.isVisible = false
+            findItem(R.id.id_cancel)?.isVisible = true
+        }
+
     }
 
     private fun showMenuItems() {
-        currentMenu.findItem(R.id.id_edit_accept)?.isVisible = true
-        currentMenu.findItem(R.id.id_edit_edit)?.isVisible = true
-        currentMenu.findItem(R.id.id_cancel)?.isVisible = false
+        currentMenu.apply {
+            findItem(R.id.id_edit_accept)?.isVisible = true
+            findItem(R.id.id_edit_edit)?.isVisible = true
+            findItem(R.id.id_cancel)?.isVisible = false
+        }
     }
 
     private fun launchPhotoPicker() {
@@ -225,15 +223,16 @@ class ImageEditorFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        touchHelper.attachToRecyclerView(binding.rvPhotoEditor)
-        binding.rvPhotoEditor.layoutManager = LinearLayoutManager(activity)
-        binding.rvPhotoEditor.adapter = adapter
-
+        binding.apply {
+            touchHelper.attachToRecyclerView(rvPhotoEditor)
+            rvPhotoEditor.layoutManager = LinearLayoutManager(activity)
+            rvPhotoEditor.adapter = adapter
+        }
         val savedList = sharedPreferences.getStringList("listForViewPager")
-        Log.d("SavedList", savedList.toString())
 
         if (savedList.isNotEmpty()) {
             adapter.updateAdapter(savedList)
+
         }
     }
 
@@ -241,8 +240,4 @@ class ImageEditorFragment : Fragment() {
         adapter.updateAdapter(list)
     }
 
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
-    }
 }
