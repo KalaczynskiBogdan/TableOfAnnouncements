@@ -53,5 +53,8 @@
     <string name="edit">Редактировать</string>
     <string name="delete">Удалить все фото</string>
     <string name="select">Выберите фото</string>
+    <string name="cancel">отменить</string>
+    <string name="change">изм.</string>
+    <string name="loading">Загрузка...</string>
 
 </resources>

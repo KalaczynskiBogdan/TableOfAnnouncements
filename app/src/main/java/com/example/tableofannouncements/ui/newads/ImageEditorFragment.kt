@@ -1,6 +1,5 @@
 package com.example.tableofannouncements.ui.newads
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -26,12 +25,16 @@ import com.example.tableofannouncements.databinding.FragmentImageEditorBinding
 import com.example.tableofannouncements.ui.newads.adapters.SelectImageAdapter
 import com.example.tableofannouncements.utils.ItemTouchMoveCallback
 import com.example.tableofannouncements.utils.SharedPreferences
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ImageEditorFragment : Fragment() {
     private var _binding: FragmentImageEditorBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter = SelectImageAdapter()
+    private var adapter = SelectImageAdapter()
 
     private val callback = ItemTouchMoveCallback(adapter)
     private val touchHelper = ItemTouchHelper(callback)
@@ -40,6 +43,8 @@ class ImageEditorFragment : Fragment() {
     private lateinit var pickMultipleMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
     private var fabStateAdd = true
+    private lateinit var currentMenu: Menu
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,28 +54,44 @@ class ImageEditorFragment : Fragment() {
         return binding.root
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        createMediaLauncher()
+        sharedPreferences = SharedPreferences(requireContext())
+        initAdapter()
+        initMenu()
+        if (adapter.mainArray.isEmpty()) {
+            launchPhotoPicker()
+        }
+        setListeners()
+    }
+
+    private fun createMediaLauncher(){
         pickMultipleMedia = registerForActivityResult(
             ActivityResultContracts.PickMultipleVisualMedia()
         ) { uris ->
             if (uris.isNotEmpty()) {
-                uris.forEach { uri ->
-                    try {
-                        requireContext().contentResolver.takePersistableUriPermission(
-                            uri,
-                            Intent.FLAG_GRANT_READ_URI_PERMISSION
-                        )
-                    } catch (e: SecurityException) {
-                        Log.e(
-                            "PhotoPicker",
-                            "Failed to take persistable permission for URI: $uri",
-                            e
-                        )
+                val dialog = ProgressDialog.createSignDialog(this)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    uris.forEach { uri ->
+                        try {
+                            requireContext().contentResolver.takePersistableUriPermission(
+                                uri,
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION
+                            )
+                        } catch (e: SecurityException) {
+                            Log.e("PhotoPicker", "Failed to take persistable permission for URI: $uri", e)
+                        }
                     }
+
+                    val imagesStringList = uris.map { it.toString() }
+
+                    withContext(Dispatchers.Main) {
+                        addToAdapter(imagesStringList)
+                    }
+                    dialog.dismiss()
                 }
-                val imagesStringList = uris.map { it.toString() }
-                addToAdapter(imagesStringList)
             } else {
                 if (adapter.mainArray.isEmpty()) {
                     findNavController().navigate(
@@ -85,17 +106,6 @@ class ImageEditorFragment : Fragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        sharedPreferences = SharedPreferences(requireContext())
-        initAdapter()
-        initMenu()
-        if (adapter.mainArray.size < 5) {
-            launchPhotoPicker()
-        }
-        setListeners()
-    }
-
     private fun setListeners() {
         binding.fabAddImage.setOnClickListener {
             if (fabStateAdd) {
@@ -104,6 +114,7 @@ class ImageEditorFragment : Fragment() {
                 adapter.clearSelectedItems()
                 fabStateAdd = true
                 binding.fabAddImage.setImageResource(R.drawable.icon_add)
+                showMenuItems()
             }
         }
     }
@@ -112,6 +123,7 @@ class ImageEditorFragment : Fragment() {
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.edit_menu, menu)
+                currentMenu = menu
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -150,9 +162,18 @@ class ImageEditorFragment : Fragment() {
                                 }
 
                                 R.id.id_selectForDeleting -> {
-                                    adapter.showCheckboxes()
-                                    fabStateAdd = false
-                                    binding.fabAddImage.setImageResource(R.drawable.item_delete)
+                                    if (adapter.mainArray.isNotEmpty()) {
+                                        adapter.showCheckboxes()
+                                        fabStateAdd = false
+                                        binding.fabAddImage.setImageResource(R.drawable.item_delete)
+                                        hideMenuItems()
+                                    } else {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Вы еще не добавили фото",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
                                     true
                                 }
 
@@ -163,10 +184,30 @@ class ImageEditorFragment : Fragment() {
                         true
                     }
 
+                    R.id.id_cancel -> {
+                        fabStateAdd = true
+                        adapter.hideCheckboxes()
+                        binding.fabAddImage.setImageResource(R.drawable.icon_add)
+                        showMenuItems()
+                        true
+                    }
+
                     else -> false
                 }
             }
         }, viewLifecycleOwner)
+    }
+
+    private fun hideMenuItems() {
+        currentMenu.findItem(R.id.id_edit_accept)?.isVisible = false
+        currentMenu.findItem(R.id.id_edit_edit)?.isVisible = false
+        currentMenu.findItem(R.id.id_cancel)?.isVisible = true
+    }
+
+    private fun showMenuItems() {
+        currentMenu.findItem(R.id.id_edit_accept)?.isVisible = true
+        currentMenu.findItem(R.id.id_edit_edit)?.isVisible = true
+        currentMenu.findItem(R.id.id_cancel)?.isVisible = false
     }
 
     private fun launchPhotoPicker() {

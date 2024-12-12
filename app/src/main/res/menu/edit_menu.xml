@@ -15,4 +15,10 @@
         android:title="@string/accept"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:visible="false"
+        android:id="@+id/id_cancel"
+        android:title="@string/cancel"
+        app:showAsAction="ifRoom">
+    </item>
 </menu>

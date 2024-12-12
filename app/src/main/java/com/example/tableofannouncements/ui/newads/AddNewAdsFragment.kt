@@ -8,7 +8,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -48,6 +50,10 @@ class AddNewAdsFragment : Fragment() {
     }
 
     private fun initMenu() {
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
+        val titleView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+        titleView.text = "Создать объявление"
+
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.accept_menu, menu)
@@ -130,6 +136,9 @@ class AddNewAdsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
+        val titleView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+        titleView.text = ""
         _binding = null
     }
 }

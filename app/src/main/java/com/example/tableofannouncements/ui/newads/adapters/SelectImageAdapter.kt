@@ -67,7 +67,7 @@ class SelectImageAdapter : RecyclerView.Adapter<SelectImageAdapter.ImageHolder>(
     @SuppressLint("NotifyDataSetChanged")
     fun updateAdapter(newList: List<String>) {
         mainArray.addAll(newList)
-        isCheckboxVisible.addAll(List(newList.size) { false })  // Чекбоксы скрыты по умолчанию
+        isCheckboxVisible.addAll(List(newList.size) { false })
         notifyDataSetChanged()
     }
 
