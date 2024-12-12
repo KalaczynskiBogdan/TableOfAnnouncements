@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     >
     <item
+        app:showAsAction="ifRoom"
         android:title="@string/accept"
         android:icon="@drawable/item_accept"
-        android:id="@+id/id_accept"
-        app:showAsAction="ifRoom"
-        />
+        android:id="@+id/id_accept" >
+    </item>
 
 </menu>

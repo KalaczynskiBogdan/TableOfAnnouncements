@@ -1,7 +1,10 @@
 package com.example.tableofannouncements.ui.newads
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -124,6 +127,11 @@ class ImageEditorFragment : Fragment() {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.edit_menu, menu)
                 currentMenu = menu
+
+                val cancelItem = menu.findItem(R.id.id_cancel)
+                val spannableTitle = SpannableString(cancelItem.title)
+                spannableTitle.setSpan(ForegroundColorSpan(Color.WHITE), 0, spannableTitle.length, 0)
+                cancelItem.title = spannableTitle
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {

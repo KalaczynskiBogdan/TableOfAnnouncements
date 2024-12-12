@@ -15,12 +15,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:background="@color/grey2"
             android:id="@+id/ivImage"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="260dp"
+            android:layout_height="240dp"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
-            android:scaleType="centerCrop"
             android:src="@drawable/icon_add" />
     </androidx.cardview.widget.CardView>
 

@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.string.close
         )
         binding.drawerLayout.addDrawerListener(toggle)
-        toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.black)
+        toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
         toggle.syncState()
 
         binding.navV.setNavigationItemSelectedListener(this)
