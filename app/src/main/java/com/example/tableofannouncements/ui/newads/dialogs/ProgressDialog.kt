@@ -1,4 +1,4 @@
-package com.example.tableofannouncements.ui.newads
+package com.example.tableofannouncements.ui.newads.dialogs
 
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment

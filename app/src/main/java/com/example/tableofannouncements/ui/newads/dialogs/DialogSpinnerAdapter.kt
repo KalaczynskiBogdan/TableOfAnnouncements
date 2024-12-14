@@ -1,4 +1,4 @@
-package com.example.tableofannouncements.ui.dialogs
+package com.example.tableofannouncements.ui.newads.dialogs
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

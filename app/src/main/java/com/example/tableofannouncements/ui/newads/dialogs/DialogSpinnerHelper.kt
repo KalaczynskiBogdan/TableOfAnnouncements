@@ -1,4 +1,4 @@
-package com.example.tableofannouncements.ui.dialogs
+package com.example.tableofannouncements.ui.newads.dialogs
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -21,7 +21,7 @@ class DialogSpinnerHelper {
 
         val sv = binding.findViewById<SearchView>(R.id.svSpinner)
 
-        val adapter = DialogSpinnerAdapter(object : DialogSpinnerAdapter.OnItemClickListener{
+        val adapter = DialogSpinnerAdapter(object : DialogSpinnerAdapter.OnItemClickListener {
             override fun onItemClicked(position: Int, name: String) {
                 callback.onItemSelected(name)
                 dialog.dismiss()

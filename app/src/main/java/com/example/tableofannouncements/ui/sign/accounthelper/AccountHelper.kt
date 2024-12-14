@@ -1,4 +1,4 @@
-package com.example.tableofannouncements.accounthelper
+package com.example.tableofannouncements.ui.sign.accounthelper
 
 import android.util.Log
 import android.widget.Toast

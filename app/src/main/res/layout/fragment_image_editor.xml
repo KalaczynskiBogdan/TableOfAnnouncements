@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.gms.ads.admanager.AdManagerAdView
-        app:adUnitId = "@string/unit_id"
+        app:adUnitId = "@string/banner_id"
         app:adSize="BANNER"
         android:id="@+id/adView"
         android:layout_marginTop="12dp"

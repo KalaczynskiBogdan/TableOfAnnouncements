@@ -1,11 +1,11 @@
-package com.example.tableofannouncements.ui.dialogs
+package com.example.tableofannouncements.ui.sign
 
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.tableofannouncements.ui.MainActivity
 import com.example.tableofannouncements.R
-import com.example.tableofannouncements.accounthelper.AccountHelper
+import com.example.tableofannouncements.ui.sign.accounthelper.AccountHelper
 import com.example.tableofannouncements.databinding.SignDialogBinding
 import com.example.tableofannouncements.utils.DialogConst
 import kotlinx.coroutines.CoroutineScope

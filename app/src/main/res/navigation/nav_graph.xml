@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/imageEditorFragment"
-        android:name="com.example.tableofannouncements.ui.newads.ImageEditorFragment"
+        android:name="com.example.tableofannouncements.ui.newads.edit.ImageEditorFragment"
         android:label="ImageEditorFragment">
         <action
             android:id="@+id/action_imageEditorFragment3_to_addNewAdsFragment"

@@ -48,6 +48,7 @@
 
     <string name="added_soon">Скоро здесь будут объявления!</string>
     <string name="edit_photos">Выберите поочередность фотографий</string>
+    <string name="create_ad">Создать объявление</string>
 
     <string name="accept">Подтвердить</string>
     <string name="edit">Редактировать</string>
@@ -57,6 +58,20 @@
     <string name="change">изм.</string>
     <string name="loading">Загрузка...</string>
 
-    <string name="unit_id">ca-app-pub-3940256099942544/9214589741</string>
+    <string name="banner_id">ca-app-pub-3940256099942544/9214589741</string>
+    <string name="interstitial_id">ca-app-pub-3940256099942544/1033173712</string>
+
+
+    <string name="ads_title_hint">Укажите название*</string>
+    <string name="ads_title_helper">Введите как минимум 15 символов</string>
+    <string name="ads_category_title">Категория*</string>
+    <string name="ads_category_select">Выберите категорию</string>
+    <string name="ads_description_hint">Описание*</string>
+    <string name="ads_description_helper">Введите как минимум 30 символов</string>
+    <string name="ads_location">Локация*</string>
+    <string name="personal_info">Ваши контактные данные</string>
+    <string name="person_name">Имя*</string>
+    <string name="person_email">Email-адрес</string>
+    <string name="person_number">Номер телефона</string>
 
 </resources>

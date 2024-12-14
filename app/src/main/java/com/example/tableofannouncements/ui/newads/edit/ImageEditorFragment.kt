@@ -1,4 +1,4 @@
-package com.example.tableofannouncements.ui.newads
+package com.example.tableofannouncements.ui.newads.edit
 
 import android.content.Intent
 import android.graphics.Color
@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -21,6 +23,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tableofannouncements.R
+import com.example.tableofannouncements.databinding.FragmentImageEditorBinding
+import com.example.tableofannouncements.ui.adsgoogle.BaseGoogleAdsFragment
+import com.example.tableofannouncements.ui.newads.dialogs.ProgressDialog
 import com.example.tableofannouncements.ui.newads.adapters.SelectImageAdapter
 import com.example.tableofannouncements.utils.ItemTouchMoveCallback
 import com.example.tableofannouncements.utils.SharedPreferences
@@ -29,7 +34,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ImageEditorFragment : BaseSelectImageFrag() {
+class ImageEditorFragment : BaseGoogleAdsFragment() {
     private var adapter = SelectImageAdapter()
 
     private val callback = ItemTouchMoveCallback(adapter)
@@ -40,6 +45,19 @@ class ImageEditorFragment : BaseSelectImageFrag() {
 
     private var fabStateAdd = true
     private lateinit var currentMenu: Menu
+
+    private var _binding: FragmentImageEditorBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentImageEditorBinding.inflate(inflater, container, false)
+        adView = binding.adView
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

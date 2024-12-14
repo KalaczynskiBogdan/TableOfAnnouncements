@@ -1,7 +1,6 @@
 package com.example.tableofannouncements.ui.newads
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -16,12 +15,13 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.tableofannouncements.R
 import com.example.tableofannouncements.databinding.FragmentAddNewAdsBinding
-import com.example.tableofannouncements.ui.dialogs.DialogSpinnerHelper
+import com.example.tableofannouncements.ui.adsgoogle.BaseGoogleAdsFragment
+import com.example.tableofannouncements.ui.newads.dialogs.DialogSpinnerHelper
 import com.example.tableofannouncements.ui.newads.adapters.ImageVpAdapter
 import com.example.tableofannouncements.utils.CityHelper
 import com.example.tableofannouncements.utils.SharedPreferences
 
-class AddNewAdsFragment : Fragment() {
+class AddNewAdsFragment : BaseGoogleAdsFragment() {
     private var _binding: FragmentAddNewAdsBinding? = null
     val binding get() = _binding!!
 
@@ -35,6 +35,7 @@ class AddNewAdsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddNewAdsBinding.inflate(inflater, container, false)
+        adView = binding.adView
         return binding.root
     }
 
@@ -52,7 +53,7 @@ class AddNewAdsFragment : Fragment() {
     private fun initMenu() {
         val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
         val titleView = toolbar.findViewById<TextView>(R.id.toolbar_title)
-        titleView.text = "Создать объявление"
+        titleView.text = getString(R.string.create_ad)
 
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -62,14 +63,7 @@ class AddNewAdsFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.id_accept -> {
-                        findNavController().navigate(
-                            R.id.action_addNewAdsFragment_to_mainFragment,
-                            null,
-                            NavOptions.Builder()
-                                .setPopUpTo(R.id.mainFragment, true)
-                                .build()
-                        )
-                        sharedPreferences.clearData("listForViewPager")
+                        showInterAd()
                         true
                     }
 
@@ -79,8 +73,20 @@ class AddNewAdsFragment : Fragment() {
         }, viewLifecycleOwner)
     }
 
+    override fun onClose() {
+        super.onClose()
+        findNavController().navigate(
+            R.id.action_addNewAdsFragment_to_mainFragment,
+            null,
+            NavOptions.Builder()
+                .setPopUpTo(R.id.mainFragment, true)
+                .build()
+        )
+        sharedPreferences.clearData("listForViewPager")
+    }
+
     private fun initListOfImages() {
-        imageAdapter = ImageVpAdapter(object : ImageVpAdapter.OnItemClickListener{
+        imageAdapter = ImageVpAdapter(object : ImageVpAdapter.OnItemClickListener {
             override fun onItemClicked() {
                 findNavController().navigate(R.id.action_addNewAdsFragment_to_imageEditorFragment3)
             }
@@ -123,7 +129,7 @@ class AddNewAdsFragment : Fragment() {
                         }
                     })
             } else {
-                Toast.makeText(requireContext(), "No country selected", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getString(R.string.select_country), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -135,10 +141,11 @@ class AddNewAdsFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
         val titleView = toolbar.findViewById<TextView>(R.id.toolbar_title)
         titleView.text = ""
         _binding = null
+        super.onDestroyView()
+
     }
 }
