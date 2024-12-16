@@ -63,6 +63,7 @@
 
 
     <string name="ads_title_hint">Укажите название*</string>
+    <string name="ads_price_title">Цена*</string>
     <string name="ads_title_helper">Введите как минимум 15 символов</string>
     <string name="ads_category_title">Категория*</string>
     <string name="ads_category_select">Выберите категорию</string>
@@ -71,7 +72,8 @@
     <string name="ads_location">Локация*</string>
     <string name="personal_info">Ваши контактные данные</string>
     <string name="person_name">Имя*</string>
-    <string name="person_email">Email-адрес</string>
-    <string name="person_number">Номер телефона</string>
+    <string name="person_email">Email-адрес*</string>
+    <string name="person_number">Номер телефона*</string>
+    <string name="ads_create">Опубликовать</string>
 
 </resources>

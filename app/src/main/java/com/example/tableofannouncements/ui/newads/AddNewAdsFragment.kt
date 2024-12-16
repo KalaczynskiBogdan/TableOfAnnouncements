@@ -43,34 +43,26 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
         super.onViewCreated(view, savedInstanceState)
         sharedPreferences = SharedPreferences(requireContext())
 
+        initToolbar()
         onClickSelectCountry()
         onClickSelectCity()
         onClickSelectImages()
+        onClickSelectCategory()
         initListOfImages()
-        initMenu()
+
+        onCreateNewAd()
     }
 
-    private fun initMenu() {
+    private fun onCreateNewAd() {
+        binding.btnCreateNewAd.setOnClickListener {
+            showInterAd()
+        }
+    }
+
+    private fun initToolbar() {
         val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
         val titleView = toolbar.findViewById<TextView>(R.id.toolbar_title)
         titleView.text = getString(R.string.create_ad)
-
-        requireActivity().addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.accept_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.id_accept -> {
-                        showInterAd()
-                        true
-                    }
-
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner)
     }
 
     override fun onClose() {
@@ -134,11 +126,25 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
         }
     }
 
+    private fun onClickSelectCategory() {
+        binding.tvSelectCategory.setOnClickListener {
+            val list = resources.getStringArray(R.array.category).toMutableList() as ArrayList
+            dialog.showSpinnerDialog(requireContext(), list, object : DialogSpinnerHelper.OnItemSelectedListener{
+                override fun onItemSelected(selectedItem: String) {
+                    binding.tvSelectCategory.text = selectedItem
+                }
+            })
+        }
+    }
+
+
+
     private fun onClickSelectImages() {
         binding.ibAddImager.setOnClickListener {
             findNavController().navigate(R.id.action_addNewAdsFragment_to_imageEditorFragment3)
         }
     }
+
 
     override fun onDestroyView() {
         val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)

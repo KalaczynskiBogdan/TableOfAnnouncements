@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
+    android:focusableInTouchMode="true"
     tools:context=".ui.newads.AddNewAdsFragment">
 
     <ScrollView
@@ -49,260 +50,383 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/vpLayout"
-                app:layout_constraintTop_toBottomOf="@+id/vpLayout"
-                android:text="@string/ads_title_hint"
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                app:boxStrokeErrorColor = "?attr/colorError"
-                app:boxStrokeColor="?attr/colorOutline"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-                android:id="@+id/outlinedTextField"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clMainInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:helperText="Введите как минимум 15 символов"
-                app:helperTextTextAppearance="?attr/textAppearanceBodySmall"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:padding="12dp"
-                    android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:background="@drawable/rounded_background"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_background"
+                app:layout_constraintTop_toBottomOf="@+id/vpLayout">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/ads_title_hint"
+                    android:textColor="@color/main_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etSelectTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:boxStrokeColor="?attr/colorOutline"
+                    app:boxStrokeErrorColor="?attr/colorError"
+                    app:helperText="Введите как минимум 15 символов"
+                    app:helperTextTextAppearance="?attr/textAppearanceBodySmall"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_background_edit"
+                        android:imeOptions="actionDone"
+                        android:inputType="textMultiLine"
+                        android:overScrollMode="always"
+                        android:padding="12dp"
+                        android:scrollbars="vertical"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
-            <TextView
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/vpLayout"
-                app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
-                android:text="@string/ads_category_title"
-                android:id="@+id/tvCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/tvSelectCategory"
-                style="@style/CityDialogTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="8dp"
-                android:padding="12dp"
-                android:text="@string/ads_category_select"
-                app:layout_constraintStart_toStartOf="@+id/vpLayout"
-                app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
-
-            <TextView
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/vpLayout"
-                app:layout_constraintTop_toBottomOf="@+id/tvSelectCategory"
-                android:text="@string/ads_description_hint"
-                android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/ads_price_title"
+                    android:textColor="@color/main_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etSelectTitle" />
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                app:boxStrokeErrorColor = "?attr/colorError"
-                app:boxStrokeColor="?attr/colorOutline"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-                android:id="@+id/etDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:helperText="@string/ads_description_helper"
-                app:helperTextTextAppearance="?attr/textAppearanceBodySmall"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:padding="8dp"
-                    android:gravity="start"
-                    android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:background="@drawable/rounded_background"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etPrice"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:boxStrokeColor="?attr/colorOutline"
+                    app:boxStrokeErrorColor="?attr/colorError"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPrice">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_background_edit"
+                        android:imeOptions="actionDone"
+                        android:inputType="textMultiLine"
+                        android:overScrollMode="always"
+                        android:padding="12dp"
+                        android:scrollbars="vertical"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/ads_category_title"
+                    android:textColor="@color/main_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etPrice" />
+
+                <TextView
+                    android:id="@+id/tvSelectCategory"
+                    style="@style/CityDialogTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="8dp"
+                    android:padding="12dp"
+                    android:text="@string/ads_category_select"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/ads_description_hint"
+                    android:textColor="@color/main_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSelectCategory" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    app:boxStrokeColor="?attr/colorOutline"
+                    app:boxStrokeErrorColor="?attr/colorError"
+                    app:helperText="@string/ads_description_helper"
+                    app:helperTextTextAppearance="?attr/textAppearanceBodySmall"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDescription">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:background="@drawable/rounded_background_edit"
+                        android:gravity="start"
+                        android:imeOptions="actionDone"
+                        android:inputType="textMultiLine"
+                        android:overScrollMode="always"
+                        android:padding="8dp"
+                        android:scrollbars="vertical"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.gms.ads.admanager.AdManagerAdView
-                android:layout_marginTop="16dp"
                 android:id="@+id/adView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 app:adSize="BANNER"
                 app:adUnitId="@string/banner_id"
-                app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+                app:layout_constraintBottom_toTopOf="@+id/clLocation"
+                app:layout_constraintTop_toBottomOf="@+id/clMainInfo" />
 
-            <TextView
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/vpLayout"
-                app:layout_constraintTop_toBottomOf="@+id/adView"
-                android:text="@string/ads_location"
-                android:id="@+id/tvLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tvSelectCountry"
-                style="@style/CityDialogTextView"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:padding="12dp"
-                android:text="@string/select_country"
-                app:layout_constraintStart_toStartOf="@+id/vpLayout"
-                app:layout_constraintTop_toBottomOf="@+id/tvLocation" />
-
-            <TextView
-                android:id="@+id/tvSelectCity"
-                style="@style/CityDialogTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:padding="12dp"
-                android:text="@string/select_city"
-                app:layout_constraintEnd_toEndOf="@+id/vpLayout"
-                app:layout_constraintTop_toBottomOf="@+id/tvSelectCountry" />
-
-            <TextView
-                android:textStyle="bold"
-                android:layout_marginStart="4dp"
                 android:layout_marginTop="16dp"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="@+id/vpLayout"
-                app:layout_constraintTop_toBottomOf="@+id/tvSelectCity"
-                android:text="@string/personal_info"
-                android:id="@+id/tvPersonInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/vpLayout"
-                app:layout_constraintTop_toBottomOf="@+id/tvPersonInfo"
-                android:text="@string/person_name"
-                android:id="@+id/tvPersonName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                app:boxStrokeErrorColor = "?attr/colorError"
-                app:boxStrokeColor="?attr/colorOutline"
-                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/tvPersonName"
-                android:id="@+id/etPersonName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:padding="12dp"
-                    android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:background="@drawable/rounded_background"
+                android:background="@drawable/rounded_background"
+                app:layout_constraintTop_toBottomOf="@+id/adView">
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/ads_location"
+                    android:textColor="@color/main_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvSelectCountry"
+                    style="@style/CityDialogTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/vpLayout"
-                app:layout_constraintTop_toBottomOf="@+id/etPersonName"
-                android:text="@string/person_email"
-                android:id="@+id/tvPersonEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                app:boxStrokeErrorColor = "?attr/colorError"
-                app:boxStrokeColor="?attr/colorOutline"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/tvPersonEmail"
-                android:id="@+id/etPersonEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
                     android:padding="12dp"
-                    android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:background="@drawable/rounded_background"
+                    android:text="@string/select_country"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLocation" />
+
+                <TextView
+                    android:id="@+id/tvSelectCity"
+                    style="@style/CityDialogTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:padding="12dp"
+                    android:text="@string/select_city"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSelectCountry" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="16dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/vpLayout"
-                app:layout_constraintTop_toBottomOf="@+id/etPersonEmail"
-                android:text="@string/person_number"
-                android:id="@+id/tvPersonNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                app:boxStrokeErrorColor = "?attr/colorError"
-                app:boxStrokeColor="?attr/colorOutline"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/tvPersonNumber"
-                android:id="@+id/etPersonNumber"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clPersonalInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:helperText="Введите как минимум 15 символов"
-                app:helperTextTextAppearance="?attr/textAppearanceBodySmall"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:padding="12dp"
-                    android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:background="@drawable/rounded_background"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_background"
+                app:layout_constraintTop_toBottomOf="@+id/clLocation">
+
+                <TextView
+                    android:id="@+id/tvPersonInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/personal_info"
+                    android:textColor="@color/main_color"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvPersonName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/person_name"
+                    android:textColor="@color/main_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPersonInfo" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:boxStrokeColor="?attr/colorOutline"
+                    app:boxStrokeErrorColor="?attr/colorError"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPersonName">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_background_edit"
+                        android:imeOptions="actionDone"
+                        android:inputType="textMultiLine"
+                        android:overScrollMode="always"
+                        android:padding="12dp"
+                        android:scrollbars="vertical"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvPersonEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/person_email"
+                    android:textColor="@color/main_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etPersonName" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etPersonEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:boxStrokeColor="?attr/colorOutline"
+                    app:boxStrokeErrorColor="?attr/colorError"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPersonEmail">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_background_edit"
+                        android:imeOptions="actionDone"
+                        android:inputType="textMultiLine"
+                        android:overScrollMode="always"
+                        android:padding="12dp"
+                        android:scrollbars="vertical"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvPersonNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/person_number"
+                    android:textColor="@color/main_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etPersonEmail" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etPersonNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    app:boxStrokeColor="?attr/colorOutline"
+                    app:boxStrokeErrorColor="?attr/colorError"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPersonNumber">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_background_edit"
+                        android:imeOptions="actionDone"
+                        android:inputType="textMultiLine"
+                        android:overScrollMode="always"
+                        android:padding="12dp"
+                        android:scrollbars="vertical"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/btnCreateNewAd"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/main_color"
+                android:text="@string/ads_create"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clPersonalInfo" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
