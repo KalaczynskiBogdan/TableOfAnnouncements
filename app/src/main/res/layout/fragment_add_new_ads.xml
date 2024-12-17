@@ -88,6 +88,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEnteredTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_background_edit"
@@ -125,6 +126,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvPrice">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEnteredPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_background_edit"
@@ -151,7 +153,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/etPrice" />
 
                 <TextView
-                    android:id="@+id/tvSelectCategory"
+                    android:id="@+id/tvSelectedCategory"
                     style="@style/CityDialogTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -174,7 +176,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvSelectCategory" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvSelectedCategory" />
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -194,6 +196,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
+                        android:id="@+id/etEnteredDescription"
                         android:background="@drawable/rounded_background_edit"
                         android:gravity="start"
                         android:imeOptions="actionDone"
@@ -241,7 +244,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvSelectCountry"
+                    android:id="@+id/tvSelectedCountry"
                     style="@style/CityDialogTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -254,7 +257,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvLocation" />
 
                 <TextView
-                    android:id="@+id/tvSelectCity"
+                    android:id="@+id/tvSelectedCity"
                     style="@style/CityDialogTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -266,7 +269,7 @@
                     android:text="@string/select_city"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvSelectCountry" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvSelectedCountry" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -320,6 +323,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/etEnteredName"
                         android:background="@drawable/rounded_background_edit"
                         android:imeOptions="actionDone"
                         android:inputType="textMultiLine"
@@ -362,6 +366,7 @@
                         android:inputType="textMultiLine"
                         android:overScrollMode="always"
                         android:padding="12dp"
+                        android:id="@+id/etEnteredEmail"
                         android:scrollbars="vertical"
                         android:textAppearance="?attr/textAppearanceBodyLarge" />
 
@@ -398,6 +403,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_background_edit"
                         android:imeOptions="actionDone"
+                        android:id="@+id/etEnteredPhone"
                         android:inputType="textMultiLine"
                         android:overScrollMode="always"
                         android:padding="12dp"

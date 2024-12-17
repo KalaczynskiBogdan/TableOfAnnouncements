@@ -84,6 +84,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
     implementation(libs.firebase.storage)
+    implementation(platform(libs.firebase.bom))
 
 
     implementation(libs.play.services)

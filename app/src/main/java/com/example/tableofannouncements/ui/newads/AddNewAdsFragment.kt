@@ -2,19 +2,17 @@ package com.example.tableofannouncements.ui.newads
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.MenuProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.tableofannouncements.R
+import com.example.tableofannouncements.data.database.DbManager
 import com.example.tableofannouncements.databinding.FragmentAddNewAdsBinding
+import com.example.tableofannouncements.models.Announcement
 import com.example.tableofannouncements.ui.adsgoogle.BaseGoogleAdsFragment
 import com.example.tableofannouncements.ui.newads.dialogs.DialogSpinnerHelper
 import com.example.tableofannouncements.ui.newads.adapters.ImageVpAdapter
@@ -27,6 +25,7 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
 
     private lateinit var imageAdapter: ImageVpAdapter
     private val dialog = DialogSpinnerHelper()
+    private val dbManager = DbManager()
 
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -50,23 +49,23 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
         onClickSelectCategory()
         initListOfImages()
 
-        onCreateNewAd()
+        onClickCreateNewAd()
     }
 
-    private fun onCreateNewAd() {
+    private fun onClickCreateNewAd() {
         binding.btnCreateNewAd.setOnClickListener {
-            showInterAd()
+            //showInterAd()
+            onClose()
         }
-    }
-
-    private fun initToolbar() {
-        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
-        val titleView = toolbar.findViewById<TextView>(R.id.toolbar_title)
-        titleView.text = getString(R.string.create_ad)
     }
 
     override fun onClose() {
         super.onClose()
+        sharedPreferences.clearData("listForViewPager")
+
+        val createdAnnouncement = fillAnnouncement()
+        dbManager.publishAd(createdAnnouncement)
+
         findNavController().navigate(
             R.id.action_addNewAdsFragment_to_mainFragment,
             null,
@@ -74,7 +73,31 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
                 .setPopUpTo(R.id.mainFragment, true)
                 .build()
         )
-        sharedPreferences.clearData("listForViewPager")
+    }
+
+    private fun fillAnnouncement(): Announcement {
+        val announcement: Announcement
+        binding.apply {
+            announcement = Announcement(
+                dbManager.db.push().key,
+                etEnteredTitle.text.toString(),
+                etEnteredPrice.text.toString(),
+                tvSelectedCategory.text.toString(),
+                etEnteredDescription.text.toString(),
+                tvSelectedCountry.text.toString(),
+                tvSelectedCity.text.toString(),
+                etEnteredName.text.toString(),
+                etEnteredEmail.text.toString(),
+                etEnteredPhone.text.toString(),
+            )
+        }
+        return announcement
+    }
+
+    private fun initToolbar() {
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
+        val titleView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+        titleView.text = getString(R.string.create_ad)
     }
 
     private fun initListOfImages() {
@@ -94,22 +117,22 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
 
     private fun onClickSelectCountry() {
         val list = CityHelper.getAllCountries(requireContext())
-        binding.tvSelectCountry.setOnClickListener {
+        binding.tvSelectedCountry.setOnClickListener {
             dialog.showSpinnerDialog(
                 requireContext(),
                 list,
                 object : DialogSpinnerHelper.OnItemSelectedListener {
                     override fun onItemSelected(selectedItem: String) {
-                        binding.tvSelectCountry.text = selectedItem
-                        binding.tvSelectCity.text = getString(R.string.select_city)
+                        binding.tvSelectedCountry.text = selectedItem
+                        binding.tvSelectedCity.text = getString(R.string.select_city)
                     }
                 })
         }
     }
 
     private fun onClickSelectCity() {
-        binding.tvSelectCity.setOnClickListener {
-            val selectedCountry = binding.tvSelectCountry.text.toString()
+        binding.tvSelectedCity.setOnClickListener {
+            val selectedCountry = binding.tvSelectedCountry.text.toString()
             if (selectedCountry != getString(R.string.select_country)) {
                 val list = CityHelper.getAllCities(requireContext(), selectedCountry)
                 dialog.showSpinnerDialog(
@@ -117,27 +140,32 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
                     list,
                     object : DialogSpinnerHelper.OnItemSelectedListener {
                         override fun onItemSelected(selectedItem: String) {
-                            binding.tvSelectCity.text = selectedItem
+                            binding.tvSelectedCity.text = selectedItem
                         }
                     })
             } else {
-                Toast.makeText(requireContext(), getString(R.string.select_country), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.select_country),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
 
     private fun onClickSelectCategory() {
-        binding.tvSelectCategory.setOnClickListener {
+        binding.tvSelectedCategory.setOnClickListener {
             val list = resources.getStringArray(R.array.category).toMutableList() as ArrayList
-            dialog.showSpinnerDialog(requireContext(), list, object : DialogSpinnerHelper.OnItemSelectedListener{
-                override fun onItemSelected(selectedItem: String) {
-                    binding.tvSelectCategory.text = selectedItem
-                }
-            })
+            dialog.showSpinnerDialog(
+                requireContext(),
+                list,
+                object : DialogSpinnerHelper.OnItemSelectedListener {
+                    override fun onItemSelected(selectedItem: String) {
+                        binding.tvSelectedCategory.text = selectedItem
+                    }
+                })
         }
     }
-
-
 
     private fun onClickSelectImages() {
         binding.ibAddImager.setOnClickListener {
