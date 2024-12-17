@@ -74,6 +74,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/icTitleStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_done"
+                    app:layout_constraintBottom_toTopOf="@+id/etSelectTitle"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etSelectTitle"
@@ -114,6 +124,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etSelectTitle" />
 
+                <ImageView
+                    android:id="@+id/icPriceStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_done"
+                    app:layout_constraintBottom_toTopOf="@+id/etPrice"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etPrice"
@@ -152,6 +172,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etPrice" />
 
+                <ImageView
+                    android:id="@+id/icCategoryStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_done"
+                    app:layout_constraintBottom_toTopOf="@+id/tvSelectedCategory"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
                 <TextView
                     android:id="@+id/tvSelectedCategory"
                     style="@style/CityDialogTextView"
@@ -178,6 +209,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvSelectedCategory" />
 
+                <ImageView
+                    android:id="@+id/icDescriptionStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_done"
+                    app:layout_constraintBottom_toTopOf="@+id/etDescription"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etDescription"
@@ -194,9 +234,9 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvDescription">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEnteredDescription"
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
-                        android:id="@+id/etEnteredDescription"
                         android:background="@drawable/rounded_background_edit"
                         android:gravity="start"
                         android:imeOptions="actionDone"
@@ -242,6 +282,17 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/icLocationStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_done"
+                    app:layout_constraintBottom_toTopOf="@+id/tvSelectedCountry"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
                     android:id="@+id/tvSelectedCountry"
@@ -296,6 +347,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
                 <TextView
                     android:id="@+id/tvPersonName"
                     android:layout_width="wrap_content"
@@ -309,6 +361,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvPersonInfo" />
 
+                <ImageView
+                    android:id="@+id/icNameStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_done"
+                    app:layout_constraintBottom_toTopOf="@+id/etPersonName"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etPersonName"
@@ -321,9 +383,9 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvPersonName">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEnteredName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/etEnteredName"
                         android:background="@drawable/rounded_background_edit"
                         android:imeOptions="actionDone"
                         android:inputType="textMultiLine"
@@ -347,6 +409,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etPersonName" />
 
+                <ImageView
+                    android:id="@+id/icEmailStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_done"
+                    app:layout_constraintBottom_toTopOf="@+id/etPersonEmail"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etPersonEmail"
@@ -359,6 +430,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvPersonEmail">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEnteredEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_background_edit"
@@ -366,7 +438,6 @@
                         android:inputType="textMultiLine"
                         android:overScrollMode="always"
                         android:padding="12dp"
-                        android:id="@+id/etEnteredEmail"
                         android:scrollbars="vertical"
                         android:textAppearance="?attr/textAppearanceBodyLarge" />
 
@@ -385,6 +456,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etPersonEmail" />
 
+                <ImageView
+                    android:id="@+id/icPhoneStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_done"
+                    app:layout_constraintBottom_toTopOf="@+id/etPersonNumber"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etPersonNumber"
@@ -399,11 +479,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvPersonNumber">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEnteredPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_background_edit"
                         android:imeOptions="actionDone"
-                        android:id="@+id/etEnteredPhone"
                         android:inputType="textMultiLine"
                         android:overScrollMode="always"
                         android:padding="12dp"
