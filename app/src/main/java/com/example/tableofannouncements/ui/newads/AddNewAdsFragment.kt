@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -16,7 +15,7 @@ import com.example.tableofannouncements.models.Announcement
 import com.example.tableofannouncements.ui.adsgoogle.BaseGoogleAdsFragment
 import com.example.tableofannouncements.ui.newads.dialogs.DialogSpinnerHelper
 import com.example.tableofannouncements.ui.newads.adapters.ImageVpAdapter
-import com.example.tableofannouncements.utils.CityHelper
+import com.example.tableofannouncements.ui.newads.helpers.MainValidatorHelper
 import com.example.tableofannouncements.utils.SharedPreferences
 
 class AddNewAdsFragment : BaseGoogleAdsFragment() {
@@ -43,14 +42,15 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
         sharedPreferences = SharedPreferences(requireContext())
 
         initToolbar()
-        onClickSelectCountry()
-        onClickSelectCity()
-        onClickSelectImages()
-        onClickSelectCategory()
-        initListOfImages()
 
+        initValidators(binding)
+
+        onClickSelectImages()
+        initListOfImages()
         onClickCreateNewAd()
+        onClickSelectCurrency()
     }
+
 
     private fun onClickCreateNewAd() {
         binding.btnCreateNewAd.setOnClickListener {
@@ -73,6 +73,11 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
                 .setPopUpTo(R.id.mainFragment, true)
                 .build()
         )
+    }
+
+    private fun initValidators(binding: FragmentAddNewAdsBinding) {
+        val mainValidatorHelper = MainValidatorHelper(binding, requireContext())
+        mainValidatorHelper.setupValidation()
     }
 
     private fun fillAnnouncement(): Announcement {
@@ -115,53 +120,15 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
         }
     }
 
-    private fun onClickSelectCountry() {
-        val list = CityHelper.getAllCountries(requireContext())
-        binding.tvSelectedCountry.setOnClickListener {
+    private fun onClickSelectCurrency() {
+        binding.tvCurrencyName.setOnClickListener {
+            val list = resources.getStringArray(R.array.currency).toMutableList() as ArrayList
             dialog.showSpinnerDialog(
                 requireContext(),
                 list,
                 object : DialogSpinnerHelper.OnItemSelectedListener {
                     override fun onItemSelected(selectedItem: String) {
-                        binding.tvSelectedCountry.text = selectedItem
-                        binding.tvSelectedCity.text = getString(R.string.select_city)
-                    }
-                })
-        }
-    }
-
-    private fun onClickSelectCity() {
-        binding.tvSelectedCity.setOnClickListener {
-            val selectedCountry = binding.tvSelectedCountry.text.toString()
-            if (selectedCountry != getString(R.string.select_country)) {
-                val list = CityHelper.getAllCities(requireContext(), selectedCountry)
-                dialog.showSpinnerDialog(
-                    requireContext(),
-                    list,
-                    object : DialogSpinnerHelper.OnItemSelectedListener {
-                        override fun onItemSelected(selectedItem: String) {
-                            binding.tvSelectedCity.text = selectedItem
-                        }
-                    })
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.select_country),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-    }
-
-    private fun onClickSelectCategory() {
-        binding.tvSelectedCategory.setOnClickListener {
-            val list = resources.getStringArray(R.array.category).toMutableList() as ArrayList
-            dialog.showSpinnerDialog(
-                requireContext(),
-                list,
-                object : DialogSpinnerHelper.OnItemSelectedListener {
-                    override fun onItemSelected(selectedItem: String) {
-                        binding.tvSelectedCategory.text = selectedItem
+                        binding.tvCurrencyName.text = selectedItem
                     }
                 })
         }
