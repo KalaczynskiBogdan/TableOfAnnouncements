@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.tableofannouncements.R
 import com.example.tableofannouncements.data.database.DbManager
@@ -15,6 +15,7 @@ import com.example.tableofannouncements.models.Announcement
 import com.example.tableofannouncements.ui.adsgoogle.BaseGoogleAdsFragment
 import com.example.tableofannouncements.ui.newads.dialogs.DialogSpinnerHelper
 import com.example.tableofannouncements.ui.newads.adapters.ImageVpAdapter
+import com.example.tableofannouncements.ui.newads.dialogs.SuccessDialog
 import com.example.tableofannouncements.ui.newads.helpers.MainValidatorHelper
 import com.example.tableofannouncements.utils.SharedPreferences
 
@@ -24,9 +25,11 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
 
     private lateinit var imageAdapter: ImageVpAdapter
     private val dialog = DialogSpinnerHelper()
+    private val successDialog = SuccessDialog()
     private val dbManager = DbManager()
 
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var mainValidatorHelper: MainValidatorHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,11 +43,10 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPreferences = SharedPreferences(requireContext())
+        mainValidatorHelper = MainValidatorHelper(binding, requireContext())
 
         initToolbar()
-
-        initValidators(binding)
-
+        initValidators()
         onClickSelectImages()
         initListOfImages()
         onClickCreateNewAd()
@@ -54,29 +56,29 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
 
     private fun onClickCreateNewAd() {
         binding.btnCreateNewAd.setOnClickListener {
-            //showInterAd()
-            onClose()
+            showInterAd()
         }
     }
 
     override fun onClose() {
         super.onClose()
-        sharedPreferences.clearData("listForViewPager")
-
         val createdAnnouncement = fillAnnouncement()
-        dbManager.publishAd(createdAnnouncement)
 
-        findNavController().navigate(
-            R.id.action_addNewAdsFragment_to_mainFragment,
-            null,
-            NavOptions.Builder()
-                .setPopUpTo(R.id.mainFragment, true)
-                .build()
-        )
+        if (mainValidatorHelper.isAllValid()) {
+
+            binding.fragmentAdd.alpha = 0.3f
+
+            dbManager.publishAd(createdAnnouncement)
+
+            sharedPreferences.clearData("listForViewPager")
+
+        successDialog.createDialog(requireContext(), this)
+
+        } else Toast.makeText(requireContext(), getString(R.string.fill_error), Toast.LENGTH_LONG)
+            .show()
     }
 
-    private fun initValidators(binding: FragmentAddNewAdsBinding) {
-        val mainValidatorHelper = MainValidatorHelper(binding, requireContext())
+    private fun initValidators() {
         mainValidatorHelper.setupValidation()
     }
 
@@ -140,13 +142,11 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
         }
     }
 
-
     override fun onDestroyView() {
         val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
         val titleView = toolbar.findViewById<TextView>(R.id.toolbar_title)
         titleView.text = ""
         _binding = null
         super.onDestroyView()
-
     }
 }

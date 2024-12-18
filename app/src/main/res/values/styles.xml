@@ -10,5 +10,11 @@
         <item name="android:drawablePadding">8dp</item>
     </style>
 
+    <style name="DialogTransparentBackground" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
 
 </resources>

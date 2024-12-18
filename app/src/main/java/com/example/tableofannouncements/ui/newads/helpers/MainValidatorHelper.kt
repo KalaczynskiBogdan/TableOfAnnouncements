@@ -36,8 +36,7 @@ class MainValidatorHelper(binding: FragmentAddNewAdsBinding, context: Context) {
 
     fun isAllValid(): Boolean {
         return titleValidator.isValid() && priceValidator.isValid()
-                && descriptionValidator.isValid() && categoryValidator.isValid() && locationValidator.isValid()
+                && descriptionValidator.isValid() && categoryValidator.isValid()
+                && locationValidator.isValid()
     }
-
-    fun saveToDatabase() {}
 }

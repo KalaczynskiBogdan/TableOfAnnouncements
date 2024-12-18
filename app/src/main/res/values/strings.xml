@@ -81,4 +81,9 @@
     <string name="all_count_for_description">/1000</string>
     <string name="uah_currency">UAH</string>
 
+    <string name="fill_error">Заполните корректно все поля</string>
+    <string name="success_d">Успех</string>
+    <string name="success_okay">Окей</string>
+    <string name="success_d_text">Ваше объявление было успешно опубликовано!</string>
+
 </resources>
