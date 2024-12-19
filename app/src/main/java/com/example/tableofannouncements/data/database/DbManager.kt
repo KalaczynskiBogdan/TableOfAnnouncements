@@ -1,6 +1,6 @@
 package com.example.tableofannouncements.data.database
 
-import com.example.tableofannouncements.models.Announcement
+import com.example.tableofannouncements.models.announcement.Announcement
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase

@@ -86,4 +86,8 @@
     <string name="success_okay">Окей</string>
     <string name="success_d_text">Ваше объявление было успешно опубликовано!</string>
 
+    <string name="notebook_banner">Ноутбуки для офиса и домашнего использования</string>
+    <string name="car_banner">Новые машины и машины с пробегом</string>
+    <string name="phone_banner">Современные смартфоны и кнопочные телефоны</string>
+
 </resources>

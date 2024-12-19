@@ -11,7 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.tableofannouncements.R
 import com.example.tableofannouncements.data.database.DbManager
 import com.example.tableofannouncements.databinding.FragmentAddNewAdsBinding
-import com.example.tableofannouncements.models.Announcement
+import com.example.tableofannouncements.models.announcement.Announcement
+import com.example.tableofannouncements.models.announcement.Price
 import com.example.tableofannouncements.ui.adsgoogle.BaseGoogleAdsFragment
 import com.example.tableofannouncements.ui.newads.dialogs.DialogSpinnerHelper
 import com.example.tableofannouncements.ui.newads.adapters.ImageVpAdapter
@@ -72,7 +73,7 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
 
             sharedPreferences.clearData("listForViewPager")
 
-        successDialog.createDialog(requireContext(), this)
+            successDialog.createDialog(requireContext(), this)
 
         } else Toast.makeText(requireContext(), getString(R.string.fill_error), Toast.LENGTH_LONG)
             .show()
@@ -88,7 +89,7 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
             announcement = Announcement(
                 dbManager.db.push().key,
                 etEnteredTitle.text.toString(),
-                etEnteredPrice.text.toString(),
+                Price(etEnteredPrice.text.toString(), tvCurrencyName.text.toString()),
                 tvSelectedCategory.text.toString(),
                 etEnteredDescription.text.toString(),
                 tvSelectedCountry.text.toString(),

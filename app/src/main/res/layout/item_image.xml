@@ -19,7 +19,7 @@
             android:id="@+id/ivImage"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="220dp"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:src="@drawable/icon_add" />
