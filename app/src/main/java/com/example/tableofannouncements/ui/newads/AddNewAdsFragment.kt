@@ -12,7 +12,6 @@ import com.example.tableofannouncements.R
 import com.example.tableofannouncements.data.database.DbManager
 import com.example.tableofannouncements.databinding.FragmentAddNewAdsBinding
 import com.example.tableofannouncements.models.announcement.Announcement
-import com.example.tableofannouncements.models.announcement.Price
 import com.example.tableofannouncements.ui.adsgoogle.BaseGoogleAdsFragment
 import com.example.tableofannouncements.ui.newads.dialogs.DialogSpinnerHelper
 import com.example.tableofannouncements.ui.newads.adapters.ImageVpAdapter
@@ -27,7 +26,7 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
     private lateinit var imageAdapter: ImageVpAdapter
     private val dialog = DialogSpinnerHelper()
     private val successDialog = SuccessDialog()
-    private val dbManager = DbManager()
+    private val dbManager = DbManager(null)
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var mainValidatorHelper: MainValidatorHelper
@@ -89,7 +88,8 @@ class AddNewAdsFragment : BaseGoogleAdsFragment() {
             announcement = Announcement(
                 dbManager.db.push().key,
                 etEnteredTitle.text.toString(),
-                Price(etEnteredPrice.text.toString(), tvCurrencyName.text.toString()),
+                etEnteredPrice.text.toString(),
+                tvCurrencyName.text.toString(),
                 tvSelectedCategory.text.toString(),
                 etEnteredDescription.text.toString(),
                 tvSelectedCountry.text.toString(),

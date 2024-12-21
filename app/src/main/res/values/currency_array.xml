@@ -2,7 +2,7 @@
 <resources>
     <string-array name="currency">
         <item>UAH</item>
-        <item>US</item>
+        <item>USD</item>
         <item>EUR</item>
         <item>PLN</item>
     </string-array>
