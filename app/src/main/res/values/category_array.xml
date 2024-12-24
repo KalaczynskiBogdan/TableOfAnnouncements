@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="category">
-        <item>Cars</item>
-        <item>Computers</item>
-        <item>Phones</item>
-        <item>Household Appliances</item>
+        <item>Машины</item>
+        <item>Компьютеры/ноутбуки</item>
+        <item>Смартфоны</item>
+        <item>Бытовая техника</item>
     </string-array>
 </resources>

@@ -9,33 +9,45 @@
         android:id="@+id/mainFragment"
         android:name="com.example.tableofannouncements.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
 
         <action
             android:id="@+id/action_mainFragment_to_addNewAdsFragment"
             app:destination="@id/addNewAdsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_announcementFragment"
+            app:destination="@id/announcementFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/addNewAdsFragment"
         android:name="com.example.tableofannouncements.ui.newads.AddNewAdsFragment"
         android:label="fragment_add_new_ads"
-        tools:layout="@layout/fragment_add_new_ads" >
+        tools:layout="@layout/fragment_add_new_ads">
         <action
             android:id="@+id/action_addNewAdsFragment_to_imageEditorFragment3"
-            app:destination="@id/imageEditorFragment"
-            />
+            app:destination="@id/imageEditorFragment" />
         <action
             android:id="@+id/action_addNewAdsFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/imageEditorFragment"
         android:name="com.example.tableofannouncements.ui.newads.edit.ImageEditorFragment"
         android:label="ImageEditorFragment">
         <action
             android:id="@+id/action_imageEditorFragment3_to_addNewAdsFragment"
-            app:destination="@id/addNewAdsFragment"
-            />
+            app:destination="@id/addNewAdsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/announcementFragment"
+        android:name="com.example.tableofannouncements.ui.announcement.AnnouncementFragment"
+        android:label="AnnouncementFragment">
+        <action
+            android:id="@+id/action_announcementFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
 </navigation>

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -16,6 +17,7 @@ import com.example.tableofannouncements.data.database.ReadDataCallBack
 import com.example.tableofannouncements.databinding.FragmentMainBinding
 import com.example.tableofannouncements.models.MainVpImage
 import com.example.tableofannouncements.models.announcement.Announcement
+import com.example.tableofannouncements.ui.announcement.AnnouncementFragment
 import com.example.tableofannouncements.ui.main.adapters.AnnouncementAdapter
 import com.example.tableofannouncements.ui.main.adapters.MainVpImageAdapter
 import com.example.tableofannouncements.utils.SharedPreferences
@@ -30,6 +32,8 @@ class MainFragment : Fragment(), ReadDataCallBack {
     private lateinit var vpMain: ViewPager2
 
     private var announcementAdapter: AnnouncementAdapter? = null
+
+    private var list: List<Announcement> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,14 +52,30 @@ class MainFragment : Fragment(), ReadDataCallBack {
         observe()
     }
 
-    private fun observe(){
+    private fun observe() {
         val dbManager = DbManager(this)
         dbManager.getAdFromDb()
     }
 
     private fun initRecycler() {
         announcementAdapter = AnnouncementAdapter(
-            clickEvent = { Toast.makeText(requireContext(), "Click", Toast.LENGTH_LONG).show() }
+            clickEvent = {
+                findNavController().navigate(
+                    R.id.action_mainFragment_to_announcementFragment,
+                    AnnouncementFragment.newInstance(
+                        it.key.toString(),
+                        it.title.toString(),
+                        it.price.toString(),
+                        it.priceCurrency.toString(),
+                        it.description.toString(),
+                        it.category.toString(),
+                        it.country.toString(),
+                        it.city.toString(),
+                        it.userName.toString(),
+                        it.userPhone.toString()
+                    ).arguments
+                )
+            }
         )
 
         binding.apply {

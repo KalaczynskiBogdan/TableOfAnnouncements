@@ -21,6 +21,29 @@
             android:src="@drawable/item_notebook_vp"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bcg_gray_transparent_rounded_100"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivImageAnnScr"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_like_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
             android:id="@+id/tvTitleAnnScr"
             android:layout_width="match_parent"
@@ -30,11 +53,11 @@
             app:layout_constraintTop_toBottomOf="@+id/ivImageAnnScr" />
 
         <TextView
-            android:layout_marginTop="16dp"
             android:id="@+id/tvPriceAnnScr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
             android:text="@string/ads_price_title"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -42,6 +65,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTitleAnnScr" />
 
         <TextView
+            android:id="@+id/tvCurrencyAnnScr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -52,167 +76,228 @@
             app:layout_constraintTop_toTopOf="@+id/tvPriceAnnScr" />
 
         <TextView
+            android:lineSpacingMultiplier="1.1"
+            android:lineSpacingExtra="2dp"
+            android:justificationMode="inter_word"
             android:id="@+id/tvDescriptionAnnScr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/ads_title_hint"
+            android:text="@string/ads_description_hint"
             app:layout_constraintTop_toBottomOf="@+id/tvPriceAnnScr" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:backgroundTint="@color/green_light"
-            app:layout_constraintStart_toStartOf="parent"
-            android:padding="12dp"
-            android:background="@drawable/rounded_background_edit"
             android:id="@+id/clButtonCall"
             android:layout_width="0dp"
-            android:layout_margin="8dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_background_edit"
+            android:backgroundTint="@color/green_light"
+            android:padding="12dp"
             app:layout_constraintEnd_toStartOf="@+id/clButtonSend"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescriptionAnnScr" >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescriptionAnnScr">
 
             <ImageView
+                android:id="@+id/ivCall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_call"
-                android:id="@+id/ivCall"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tvCall"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintEnd_toStartOf="@+id/tvCall"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ivCall"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/tvCall"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Call"
                 android:textColor="@color/grey2"
                 android:textSize="20sp"
-                android:text="Call"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivCall"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:padding="12dp"
-            app:layout_constraintStart_toEndOf="@+id/clButtonCall"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/rounded_background_edit"
             android:id="@+id/clButtonSend"
-            android:layout_margin="8dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescriptionAnnScr" >
-            
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_background_edit"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/clButtonCall"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescriptionAnnScr">
+
             <ImageView
+                android:id="@+id/ivSend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_send"
-                android:id="@+id/ivSend"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tvSend"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintEnd_toStartOf="@+id/tvSend"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tvSend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Send"
                 android:textColor="@color/green_light"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivSend"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/tvSend"
-                android:textSize="20sp"
-                android:text="Send"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-        
-        <TextView
-            android:textColor="@color/dark_grey"
-            app:layout_constraintEnd_toStartOf="@+id/tvCategoryReceived"
-            android:id="@+id/tvCategoryAnnScr"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/ads_category_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/clButtonCall"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_marginEnd="16dp"
-            android:id="@+id/tvCategoryReceived"
+            android:id="@+id/tvCategoryAnnScr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:text="@string/title_category"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintEnd_toStartOf="@+id/tvCategoryReceivedAnnScr"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clButtonCall" />
+
+        <TextView
+            android:id="@+id/tvCategoryReceivedAnnScr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/ads_category_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvCategoryAnnScr"
-            app:layout_constraintTop_toBottomOf="@+id/clButtonCall"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toBottomOf="@+id/clButtonCall" />
 
         <TextView
-            android:textColor="@color/dark_grey"
-            app:layout_constraintEnd_toStartOf="@+id/tvCountryReceived"
             android:id="@+id/tvCountryAnnScr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/ads_location"
+            android:text="@string/title_country"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintEnd_toStartOf="@+id/tvCountryReceivedAnnScr"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCategoryAnnScr"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvCategoryAnnScr" />
 
         <TextView
-            android:layout_marginEnd="16dp"
-            android:id="@+id/tvCountryReceived"
+            android:id="@+id/tvCountryReceivedAnnScr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/ads_category_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvCountryAnnScr"
-            app:layout_constraintTop_toBottomOf="@+id/tvCategoryReceived"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvCategoryReceivedAnnScr" />
 
         <TextView
-            android:textColor="@color/dark_grey"
-            app:layout_constraintEnd_toStartOf="@+id/tvCityReceived"
             android:id="@+id/tvCityAnnScr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/ads_location"
+            android:text="@string/title_city"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintEnd_toStartOf="@+id/tvCityReceivedAnnScr"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCountryAnnScr"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvCountryAnnScr" />
 
         <TextView
-            android:layout_marginEnd="16dp"
-            android:id="@+id/tvCityReceived"
+            android:id="@+id/tvCityReceivedAnnScr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/ads_category_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvCityAnnScr"
-            app:layout_constraintTop_toBottomOf="@+id/tvCountryAnnScr"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvCountryAnnScr" />
 
         <TextView
-            android:textStyle="bold"
-            android:textSize="24sp"
             android:id="@+id/tvProfileAnn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="@string/personal_info"
+            android:text="@string/title_author"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/tvCityAnnScr" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/clAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/rounded_background_edit"
+            android:padding="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileAnn">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvProfileImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                app:cardCornerRadius="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivProfileImage"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@color/dark_grey"
+                    android:contentDescription="@null"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_user_black_24" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvProfileNameAnnScr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/person_name"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/cvProfileImage"
+                app:layout_constraintTop_toTopOf="@+id/cvProfileImage" />
+
+            <TextView
+                android:id="@+id/tvProfileNumberAnnScr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/person_number"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/cvProfileImage"
+                app:layout_constraintStart_toStartOf="@+id/tvProfileNameAnnScr"
+                app:layout_constraintTop_toBottomOf="@+id/tvProfileNameAnnScr" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

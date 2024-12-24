@@ -90,5 +90,10 @@
     <string name="car_banner">Новые машины и машины с пробегом</string>
     <string name="phone_banner">Современные смартфоны и кнопочные телефоны</string>
 
+    <string name="title_author">Автор</string>
+    <string name="title_category">Категория:</string>
+    <string name="title_country">Страна:</string>
+    <string name="title_city">Город:</string>
+
 
 </resources>
