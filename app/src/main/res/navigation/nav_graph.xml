@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/addNewAdsFragment"
-        android:name="com.example.tableofannouncements.ui.newads.AddNewAdsFragment"
+        android:name="com.example.tableofannouncements.ui.addanns.AddNewAnnFragment"
         android:label="fragment_add_new_ads"
         tools:layout="@layout/fragment_add_new_ads">
         <action
@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/imageEditorFragment"
-        android:name="com.example.tableofannouncements.ui.newads.edit.ImageEditorFragment"
+        android:name="com.example.tableofannouncements.ui.addanns.edit.ImageEditorFragment"
         android:label="ImageEditorFragment">
         <action
             android:id="@+id/action_imageEditorFragment3_to_addNewAdsFragment"
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/announcementFragment"
-        android:name="com.example.tableofannouncements.ui.announcement.AnnouncementFragment"
+        android:name="com.example.tableofannouncements.ui.anninfo.AnnouncementInfoFragment"
         android:label="AnnouncementFragment">
         <action
             android:id="@+id/action_announcementFragment_to_mainFragment"

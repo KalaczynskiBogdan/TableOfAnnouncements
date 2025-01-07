@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tableofannouncements.databinding.ItemAnnouncementBinding
-import com.example.tableofannouncements.models.announcement.Announcement
+import com.example.tableofannouncements.domain.models.announcement.Announcement
 
 class AnnouncementAdapter(
     private val clickEvent: (Announcement) -> Unit,

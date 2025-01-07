@@ -5,35 +5,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.tableofannouncements.R
-import com.example.tableofannouncements.data.database.DbManager
-import com.example.tableofannouncements.data.database.ReadDataCallBack
 import com.example.tableofannouncements.databinding.FragmentMainBinding
-import com.example.tableofannouncements.models.MainVpImage
-import com.example.tableofannouncements.models.announcement.Announcement
-import com.example.tableofannouncements.ui.announcement.AnnouncementFragment
+import com.example.tableofannouncements.domain.models.MainVpImage
+import com.example.tableofannouncements.ui.anninfo.AnnouncementInfoFragment
 import com.example.tableofannouncements.ui.main.adapters.AnnouncementAdapter
 import com.example.tableofannouncements.ui.main.adapters.MainVpImageAdapter
 import com.example.tableofannouncements.utils.SharedPreferences
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-
-class MainFragment : Fragment(), ReadDataCallBack {
+@AndroidEntryPoint
+class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: MainViewModel by viewModels()
 
     private lateinit var vpMain: ViewPager2
 
     private var announcementAdapter: AnnouncementAdapter? = null
-
-    private var list: List<Announcement> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,13 +45,15 @@ class MainFragment : Fragment(), ReadDataCallBack {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setMainViewPager()
-        initRecycler()
+        viewModel.getListOfAnnouncements()
         observe()
+        initRecycler()
     }
 
     private fun observe() {
-        val dbManager = DbManager(this)
-        dbManager.getAdFromDb()
+        viewModel.listOfAnnouncementsLiveData.observe(viewLifecycleOwner){
+            announcementAdapter?.updateList(it)
+        }
     }
 
     private fun initRecycler() {
@@ -62,7 +61,7 @@ class MainFragment : Fragment(), ReadDataCallBack {
             clickEvent = {
                 findNavController().navigate(
                     R.id.action_mainFragment_to_announcementFragment,
-                    AnnouncementFragment.newInstance(
+                    AnnouncementInfoFragment.newInstance(
                         it.key.toString(),
                         it.title.toString(),
                         it.price.toString(),
@@ -107,9 +106,5 @@ class MainFragment : Fragment(), ReadDataCallBack {
                 vpMain.setCurrentItem(nextItem, true)
             }
         }
-    }
-
-    override fun getData(list: List<Announcement>) {
-        announcementAdapter?.updateList(list)
     }
 }

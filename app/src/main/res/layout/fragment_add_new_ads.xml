@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/grey"
     android:focusableInTouchMode="true"
-    tools:context=".ui.newads.AddNewAdsFragment">
+    tools:context=".ui.addanns.AddNewAnnFragment">
 
     <ScrollView
         android:layout_width="match_parent"

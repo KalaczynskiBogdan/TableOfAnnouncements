@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tableofannouncements.R
-import com.example.tableofannouncements.models.MainVpImage
+import com.example.tableofannouncements.domain.models.MainVpImage
 
 class MainVpImageAdapter(private val imageVpArray: ArrayList<MainVpImage>) : RecyclerView.Adapter<MainVpImageAdapter.MainVpImageViewHolder>() {
 

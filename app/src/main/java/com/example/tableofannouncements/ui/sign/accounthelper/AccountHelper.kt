@@ -51,7 +51,6 @@ class AccountHelper(act: MainActivity) {
         }
     }
 
-
     fun signInWithEmail(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
             activity.myAuth.signInWithEmailAndPassword(email, password)
