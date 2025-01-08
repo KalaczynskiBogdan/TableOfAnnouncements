@@ -7,7 +7,7 @@ import com.example.tableofannouncements.ui.MainActivity
 import com.example.tableofannouncements.R
 import com.example.tableofannouncements.ui.sign.accounthelper.AccountHelper
 import com.example.tableofannouncements.databinding.SignDialogBinding
-import com.example.tableofannouncements.utils.DialogConst
+import com.example.tableofannouncements.utils.SignConst
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,7 +33,7 @@ class DialogSignHelper(act: MainActivity) {
     }
 
     private fun setDialogState(index: Int, binding: SignDialogBinding) {
-        if (index == DialogConst.SIGN_UP_STATE) {
+        if (index == SignConst.SIGN_UP_STATE) {
             binding.tvSignTitle.text = activity.resources.getString(R.string.an_sign_up)
             binding.btnSign.text = activity.resources.getString(R.string.sign_up_action)
         } else {
@@ -44,7 +44,7 @@ class DialogSignHelper(act: MainActivity) {
     }
 
     private fun setOnClickSign(index: Int, binding: SignDialogBinding, dialog: AlertDialog) {
-        if (index == DialogConst.SIGN_UP_STATE) {
+        if (index == SignConst.SIGN_UP_STATE) {
             dialog.dismiss()
             accHelper.signUpWithEmail(
                 binding.etSignEmail.text.toString(),

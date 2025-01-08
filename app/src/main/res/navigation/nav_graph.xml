@@ -50,4 +50,10 @@
             app:destination="@id/mainFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/signFragment"
+        android:name="com.example.tableofannouncements.ui.sign.SignFragment"
+        android:label="SignFragment">
+    </fragment>
+
 </navigation>

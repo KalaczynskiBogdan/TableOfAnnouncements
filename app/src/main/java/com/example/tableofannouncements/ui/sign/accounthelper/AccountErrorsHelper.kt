@@ -9,16 +9,6 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 class AccountErrorsHelper(act: MainActivity) {
     private val activity = act
 
-    fun handleUserCollisionException(exception: FirebaseAuthUserCollisionException) {
-        if (exception.errorCode == FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE) {
-            Toast.makeText(
-                activity,
-                FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE,
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
-
     fun handleInvalidCredentialsException(exception: FirebaseAuthInvalidCredentialsException) {
         if (exception.errorCode == FirebaseAuthConstants.ERROR_INVALID_EMAIL) {
             Toast.makeText(

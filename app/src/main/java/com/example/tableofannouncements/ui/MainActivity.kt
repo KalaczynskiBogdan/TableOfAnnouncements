@@ -15,8 +15,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import com.example.tableofannouncements.R
 import com.example.tableofannouncements.databinding.ActivityMainBinding
-import com.example.tableofannouncements.utils.DialogConst
+import com.example.tableofannouncements.utils.SignConst
 import com.example.tableofannouncements.ui.sign.DialogSignHelper
+import com.example.tableofannouncements.ui.sign.SignFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -115,11 +116,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.id_smartphone -> {}
             R.id.id_dm -> {}
             R.id.id_sign_up -> {
-                dialogHelper.createSignDialog(DialogConst.SIGN_UP_STATE)
+                val fragment = SignFragment.newInstance(SignConst.SIGN_UP_STATE)
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment,fragment)
+                    .commit()
+                showMenuItem = false
+                invalidateOptionsMenu()
             }
 
             R.id.id_sign_in -> {
-                dialogHelper.createSignDialog(DialogConst.SIGN_IN_STATE)
+                val fragment = SignFragment.newInstance(SignConst.SIGN_IN_STATE)
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment,fragment)
+                    .commit()
+                showMenuItem = false
+                invalidateOptionsMenu()
             }
 
             R.id.id_out -> {
